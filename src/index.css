@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Camera Obscura";
+  src: url("./assets/fonts/CameraObscuraDEMO.woff2") format("woff2"),
+       url("./assets/fonts/CameraObscuraDEMO.woff") format("woff");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-camera: "Camera Obscura", ui-serif, Georgia, serif;
+}
