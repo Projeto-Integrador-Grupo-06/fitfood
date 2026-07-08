@@ -1,0 +1,51 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #0E3322;
+  padding: 0.75rem 2rem;
+  width: 100%;
+  font-family: 'Creato Display', sans-serif;
+}
+
+.navbar-logo img {
+  height: 48px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navbar-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.navbar-home {
+  background-color: #ffffff;
+  color: #0E3322 !important;
+  padding: 0.3rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.navbar-perfil {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+}
+
+.navbar-perfil a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.navbar-perfil-icon {
+  font-size: 1.3rem;
+}
