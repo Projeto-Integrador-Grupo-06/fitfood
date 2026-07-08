@@ -2,13 +2,27 @@
 
 @font-face {
   font-family: "Camera Obscura";
-  src: url("./assets/fonts/CameraObscuraDEMO.woff2") format("woff2"),
-       url("./assets/fonts/CameraObscuraDEMO.woff") format("woff");
-  font-weight: 400 900;
-  font-style: normal;
-  font-display: swap;
+  src: url("./assets/fonts/CameraObscura.otf");
 }
 
-@theme {
-  --font-camera: "Camera Obscura", ui-serif, Georgia, serif;
+@font-face {
+  font-family: "Creato Display";
+  src: url("./assets/fonts/CreatoDisplay-Regular.otf");
+}
+
+@font-face {
+  font-family: "Creato Display Medium";
+  src: url("./assets/fonts/CreatoDisplay-Medium.otf");
+}
+
+.font-camera {
+  font-family: "Camera Obscura";
+}
+
+.font-creato {
+  font-family: "Creato Display";
+}
+
+.font-creato-medium {
+  font-family: "Creato Display Medium";
 }
