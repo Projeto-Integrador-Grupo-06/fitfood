@@ -1,21 +1,21 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useContext, useEffect, useState, type ChangeEvent, type FormEvent } from "react"
-import { AuthContext } from "../../contexts/AuthContext"
+// import { AuthContext } from "../../contexts/AuthContext"
 import type UsuarioLogin from "../../models/UsuarioLogin"
 import { ClipLoader } from "react-spinners"
 import logo from "../../assets/img/LogoLogin.png"
 
 function Login() {
   const navigate = useNavigate()
-  const { usuario, handleLogin, isLoading } = useContext(AuthContext)
+  // const { usuario, handleLogin, isLoading } = useContext(AuthContext)
 
   const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>({} as UsuarioLogin)
 
-  useEffect(() => {
-    if (usuario.token !== "") {
-      navigate("/")
-    }
-  }, [usuario])
+  // useEffect(() => {
+  //   if (usuario.token !== "") {
+  //     navigate("/")
+  //   }
+  // }, [usuario])
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
     setUsuarioLogin({
@@ -26,7 +26,7 @@ function Login() {
 
   function login(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    handleLogin(usuarioLogin)
+    // handleLogin(usuarioLogin)
   }
 
   return (
@@ -77,7 +77,8 @@ function Login() {
               type="submit"
               className="mt-2 w-full rounded-full py-4 font-bold text-lg shadow-md transition bg-[#CA5030] hover:brightness-95 text-[#F0F0CF] flex justify-center"
             >
-              {isLoading ? <ClipLoader color="#ffffff" size={24} /> : <span>Login</span>}
+              <span>Login</span>
+              {/* {isLoading ? <ClipLoader color="#ffffff" size={24} /> : <span>Login</span>} */}
             </button>
           </form>
         </div>
