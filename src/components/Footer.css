@@ -1,0 +1,14 @@
+.footer {
+  background-color: #0E3322;
+  color: #ffffff;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  width: 100%;
+  font-family: 'Creato Display', sans-serif;
+}
+
+.footer p {
+  margin: 0.3rem 0;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
