@@ -13,6 +13,7 @@ function App() {
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Perfil />} />
+          <Route path="/cadastro" element={<Cadastro />
         </Routes>
       </main>
 
