@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import fundoHome from "../../assets/img/fundo-home.png";
+import fundoHome from "../../assets/img/fundo-home.webp";
 import gptHome from "../../assets/img/gpt-home.png";
+import carnebatata from "../../assets/img/carne-batata.png";
+import frangoarroz from "../../assets/img/frango-arroz.png";
+import omeletelegumes from "../../assets/img/omelete-legumes.png";
+import peixelegumes from "../../assets/img/peixe-legume.png";
+import saladafrango from "../../assets/img/salada-frango.png";
+import tilapiaabobrinha from "../../assets/img/tilapia-abobrinha.png";
+import acompanheprogresso from "../../assets/img/acompanhe-progresso.png";
+import adicionealimentos from "../../assets/img/adicione-alimentos.png";
+import organizerotina from "../../assets/img/organize-rotina.png";
 
 interface Receita {
   id: number;
@@ -21,10 +30,35 @@ interface Categoria {
   receitas: Receita[];
 }
 
-
-function imagemPlaceholder(nome: string): string {
-  return `https://placehold.co/600x400?text=${encodeURIComponent(nome)}`;
+interface Destaque {
+  titulo: string;
+  descricao: string;
+  imagem: string;
 }
+
+const destaques: Destaque[] = [
+  {
+    titulo: "Acompanhe seu progresso",
+    descricao:
+      "O sistema calcula sua meta diária e compara com as calorias que você já consumiu.",
+    imagem: acompanheprogresso,
+  },
+  {
+    titulo: "Organize sua rotina",
+    descricao:
+      "Crie categorias como café da manhã, almoço e jantar para manter tudo em ordem.",
+    imagem: organizerotina,
+  },
+  {
+    titulo: "Adicione seus alimentos",
+    descricao:
+      "Adicione os alimentos em cada categoria e acompanhe tudo com facilidade.",
+    imagem: adicionealimentos,
+  },
+];
+
+// Cor de destaque de cada categoria (segue a ordem do array `categorias`)
+const CORES_CATEGORIA = ["#0E3322", "#CA5030", "#839558"];
 
 const categorias: Categoria[] = [
   {
@@ -37,7 +71,7 @@ const categorias: Categoria[] = [
         id: 1,
         nome: "Carne com Purê",
         kcal: 450,
-        imagem: imagemPlaceholder("Carne com Purê"),  //<--- import da imagem aqui
+        imagem: carnebatata,
         ingredientes: [
           "120 g de carne magra",
           "150 g de purê de batata",
@@ -49,20 +83,19 @@ const categorias: Categoria[] = [
         id: 2,
         nome: "Peixe com Legumes",
         kcal: 390,
-        imagem: imagemPlaceholder("Peixe com Legumes"),
+        imagem: peixelegumes,
         ingredientes: [
           "120 g de peixe",
           "100 g de arroz integral",
           "100 g de legumes cozidos",
         ],
-        modoPreparo:
-          "Grelhe o peixe, cozinhe o arroz e os legumes e sirva.",
+        modoPreparo: "Grelhe o peixe, cozinhe o arroz e os legumes e sirva.",
       },
       {
         id: 3,
         nome: "Frango com Arroz",
         kcal: 360,
-        imagem: imagemPlaceholder("Frango com Arroz"),
+        imagem: frangoarroz,
         ingredientes: [
           "100 g de frango",
           "80 g de arroz integral",
@@ -78,46 +111,7 @@ const categorias: Categoria[] = [
     titulo: "Superávit Calórico",
     descricao:
       "O consumo de calorias é maior que o gasto diário, favorecendo o ganho de peso e de massa muscular quando aliado a exercícios.",
-    receitas: [
-      {
-        id: 1,
-        nome: "Frango com Batata-Doce",
-        kcal: 600,
-        imagem: imagemPlaceholder("Frango com Batata-Doce"),
-        ingredientes: [
-          "150 g de frango",
-          "200 g de batata-doce",
-          "1 colher de sopa de azeite",
-        ],
-        modoPreparo:
-          "Grelhe o frango, cozinhe a batata-doce e finalize com azeite.",
-      },
-      {
-        id: 2,
-        nome: "Macarrão com Carne Moída",
-        kcal: 650,
-        imagem: imagemPlaceholder("Macarrão com Carne Moída"),
-        ingredientes: [
-          "120 g de macarrão",
-          "120 g de carne moída",
-          "Molho de tomate",
-        ],
-        modoPreparo: "Cozinhe o macarrão, prepare a carne com o molho e misture.",
-      },
-      {
-        id: 3,
-        nome: "Vitamina de Banana",
-        kcal: 540,
-        imagem: imagemPlaceholder("Vitamina de Banana"),
-        ingredientes: [
-          "2 bananas",
-          "300 ml de leite",
-          "2 colheres de aveia",
-          "1 colher de sopa de pasta de amendoim",
-        ],
-        modoPreparo: "Bata todos os ingredientes no liquidificador.",
-      },
-    ],
+    receitas: [],
   },
   {
     chave: "deficit",
@@ -129,7 +123,7 @@ const categorias: Categoria[] = [
         id: 1,
         nome: "Salada de Frango",
         kcal: 220,
-        imagem: imagemPlaceholder("Salada de Frango"),
+        imagem: saladafrango,
         ingredientes: [
           "100 g de frango grelhado",
           "50 g de alface",
@@ -142,7 +136,7 @@ const categorias: Categoria[] = [
         id: 2,
         nome: "Omelete com Legumes",
         kcal: 180,
-        imagem: imagemPlaceholder("Omelete com Legumes"),
+        imagem: omeletelegumes,
         ingredientes: ["2 ovos", "50 g de espinafre", "50 g de tomate"],
         modoPreparo:
           "Bata os ovos, misture os legumes e cozinhe em uma frigideira antiaderente.",
@@ -151,7 +145,7 @@ const categorias: Categoria[] = [
         id: 3,
         nome: "Tilápia com Abobrinha",
         kcal: 170,
-        imagem: imagemPlaceholder("Tilápia com Abobrinha"),
+        imagem: tilapiaabobrinha,
         ingredientes: ["120 g de filé de tilápia", "100 g de abobrinha"],
         modoPreparo: "Grelhe a tilápia, refogue a abobrinha e sirva.",
       },
@@ -159,17 +153,21 @@ const categorias: Categoria[] = [
   },
 ];
 
+// Lista única com todas as receitas de todas as categorias, usada pelo carrossel
+const receitas: Receita[] = categorias.flatMap((cat) => cat.receitas);
+
 function Home() {
-  const [categoriaAtual, setCategoriaAtual] =
-    useState<CategoriaChave>("manutencao");
   const [receitaIndex, setReceitaIndex] = useState(0);
 
-  const categoria = categorias.find((c) => c.chave === categoriaAtual)!;
-  const receita = categoria.receitas[receitaIndex];
+  const receita1 = receitas[receitaIndex];
+  const receita2 = receitas[(receitaIndex + 1) % receitas.length];
 
-  function selecionarCategoria(chave: CategoriaChave) {
-    setCategoriaAtual(chave);
-    setReceitaIndex(0);
+  function receitaAnterior() {
+    setReceitaIndex((prev) => (prev - 2 + receitas.length) % receitas.length);
+  }
+
+  function proximaReceita() {
+    setReceitaIndex((prev) => (prev + 2) % receitas.length);
   }
 
   return (
@@ -184,25 +182,44 @@ function Home() {
       </section>
 
       {/* Introdução */}
-      <section className="bg-[#F0F0CF] px-4 py-16 text-center">
-        <h1 className="font-camera text-6xl md:text-7xl mb-6">fit food</h1>
-        <p className="max-w-3xl mx-auto text-sm md:text-base leading-relaxed mb-8">
-          Atualmente, a rotina corrida faz com que muitas pessoas escolham
-          alimentos apenas pela praticidade, deixando uma alimentação
-          equilibrada em segundo plano. Pensando nisso, o Fit Food foi criado
-          para ajudar você a cuidar da sua saúde de forma simples. Ao cadastrar
-          suas informações, calculamos sua necessidade calórica diária.
-          Depois, você pode registrar os alimentos consumidos e acompanhar a
-          comparação entre as calorias ingeridas e a quantidade ideal para
-          seus objetivos, tornando o controle da alimentação mais fácil e
-          consciente.
-        </p>
-        <Link
-          to="/cadastro"
-          className="inline-block bg-[#CA5030] text-white font-creato-medium px-8 py-3 rounded-full hover:brightness-95 transition"
-        >
-          COMECE JÁ
-        </Link>
+      <section className="bg-[#F0F0CF] px-4 py-16">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <div className="text-center lg:text-left">
+            <h1 className="font-camera text-6xl md:text-7xl mb-6">fit food</h1>
+            <p className="text-sm md:text-base leading-relaxed mb-8">
+              Atualmente, a rotina corrida faz com que muitas pessoas escolham
+              alimentos apenas pela praticidade, deixando uma alimentação
+              equilibrada em segundo plano. Pensando nisso, o Fit Food foi
+              criado para ajudar você a cuidar da sua saúde de forma simples.
+            </p>
+            <Link
+              to="/cadastro"
+              className="inline-block bg-[#CA5030] text-white font-creato-medium px-8 py-3 rounded-full hover:brightness-95 transition"
+            >
+              COMECE JÁ
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4">
+            {destaques.map((item) => (
+              <div key={item.titulo} className="flex flex-col">
+                <img
+                  src={item.imagem}
+                  alt={item.titulo}
+                  className="w-full h-32 md:h-40 object-cover rounded-t-xl"
+                />
+                <div className="bg-[#839558] text-white text-center rounded-b-xl p-3 flex-1">
+                  <p className="font-creato-medium text-xs md:text-sm mb-1">
+                    {item.titulo}
+                  </p>
+                  <p className="text-[10px] md:text-xs opacity-90">
+                    {item.descricao}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Objetivos calóricos */}
@@ -214,31 +231,24 @@ function Home() {
         </h2>
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-          {categorias.map((cat) => (
-            <button
-              key={cat.chave}
-              type="button"
-              onClick={() => selecionarCategoria(cat.chave)}
-              className="text-center text-left focus:outline-none group"
-            >
-              <h3 className="text-xl mb-4 text-center">{cat.titulo}</h3>
+          {categorias.map((cat, index) => {
+            const cor = CORES_CATEGORIA[index % CORES_CATEGORIA.length];
+            return (
               <div
-                className={`bg-[#839558] text-white rounded-2xl p-6 h-full transition ring-offset-2 ${
-                  categoriaAtual === cat.chave
-                    ? "ring-4 ring-[#CA5030]"
-                    : "ring-0 group-hover:brightness-95"
-                }`}
+                key={cat.chave}
+                className="rounded-2xl overflow-hidden flex flex-col"
+                style={{ backgroundColor: cor }}
               >
-                {cat.descricao}
+                <h3 className="text-white text-center font-creato-medium text-lg md:text-xl py-4 px-4">
+                  {cat.titulo}
+                </h3>
+                <div className="bg-[#F5F1D9] text-[#0E3322] text-sm md:text-base leading-relaxed rounded-xl mx-4 mb-4 p-4 flex-1">
+                  {cat.descricao}
+                </div>
               </div>
-            </button>
-          ))}
+            );
+          })}
         </div>
-
-        <p className="text-center text-sm mt-4 opacity-70">
-          Clique em uma das opções acima para ver as receitas indicadas para
-          esse objetivo.
-        </p>
       </section>
 
       {/* Receitas */}
@@ -246,51 +256,79 @@ function Home() {
         <h2 className="font-camera text-4xl md:text-5xl text-center mb-2">
           Receitas
         </h2>
-        <p className="text-center text-sm mb-8 opacity-80">{categoria.titulo}</p>
 
-        <div className="max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-lg grid grid-cols-1 md:grid-cols-2 bg-[#839558]">
-          <img
-            src={receita.imagem}
-            alt={receita.nome}
-            className="w-full h-72 md:h-full object-cover"
-          />
+        <div className="max-w-5xl mx-auto flex items-center gap-3 md:gap-6">
+          <button
+            type="button"
+            onClick={receitaAnterior}
+            aria-label="Receita anterior"
+            className="shrink-0 text-[#0E3322] hover:text-[#CA5030] transition text-3xl md:text-4xl"
+          >
+            ◀
+          </button>
 
-          <div className="text-white p-8 flex flex-col gap-4">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h3 className="font-camera text-3xl">{receita.nome}</h3>
-              <span className="bg-[#0E3322] text-sm px-4 py-1.5 rounded-full whitespace-nowrap">
-                Total: ≈ {receita.kcal} kcal
-              </span>
-            </div>
+          <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {[receita1, receita2].map((receita) => (
+              <div
+                key={receita.id}
+                className="rounded-2xl overflow-hidden shadow-lg bg-[#839558] flex flex-col sm:flex-row"
+              >
+                <div className="relative sm:w-2/5 shrink-0">
+                  <img
+                    src={receita.imagem}
+                    alt={receita.nome}
+                    className="w-full h-48 sm:h-full object-cover"
+                  />
+                  <span className="absolute top-3 left-3 bg-white/90 text-[#0E3322] px-3 py-1 rounded-full text-xs font-creato-medium">
+                    Total: ≈ {receita.kcal} kcal
+                  </span>
+                </div>
 
-            <div>
-              <p className="font-creato-medium mb-1">Ingredientes:</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                {receita.ingredientes.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
-            </div>
+                <div className="text-white p-6 flex-1">
+                  <h3 className="font-camera text-2xl mb-3">{receita.nome}</h3>
 
-            <div>
-              <p className="font-creato-medium mb-1">Modo de preparo:</p>
-              <p className="text-sm">{receita.modoPreparo}</p>
-            </div>
+                  <p className="font-creato-medium mb-2">Ingredientes</p>
+
+                  <ul className="list-disc list-inside text-sm space-y-1 mb-4">
+                    {receita.ingredientes.map((ingrediente, index) => (
+                      <li key={index}>{ingrediente}</li>
+                    ))}
+                  </ul>
+
+                  <p className="font-creato-medium mb-2">Modo de preparo</p>
+
+                  <p className="text-sm">{receita.modoPreparo}</p>
+                </div>
+              </div>
+            ))}
           </div>
+
+          <button
+            type="button"
+            onClick={proximaReceita}
+            aria-label="Próxima receita"
+            className="shrink-0 text-[#0E3322] hover:text-[#CA5030] transition text-3xl md:text-4xl"
+          >
+            ▶
+          </button>
         </div>
 
         {/* Dots de navegação */}
         <div className="flex justify-center gap-3 mt-6">
-          {categoria.receitas.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setReceitaIndex(index)}
-              aria-label={`Ver receita ${index + 1}`}
-              className={`w-3.5 h-3.5 rounded-full transition ${
-                index === receitaIndex ? "bg-[#0E3322]" : "bg-[#839558]/60"
-              }`}
-            />
-          ))}
+          {Array.from({ length: Math.ceil(receitas.length / 2) }).map(
+            (_, index) => (
+              <button
+                key={index}
+                onClick={() => setReceitaIndex(index * 2)}
+                aria-label={`Ver receita ${index + 1}`}
+                className={`w-3.5 h-3.5 rounded-full transition ${
+                  index === Math.floor(receitaIndex / 2)
+                    ? "bg-[#0E3322]"
+                    : "bg-[#839558]/60"
+                }`}
+              />
+            )
+          )}
         </div>
       </section>
 
