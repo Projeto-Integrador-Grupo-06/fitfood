@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+
 import Perfil from "./pages/perfil/Perfil";
 import Cadastro from "./pages/cadastro/Cadastro";
 import Login from "./pages/login/Login";
@@ -11,6 +11,7 @@ import Sobre from "./pages/sobre/Sobre";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Slides from './pages/slides/Slides'
+import Footer from "./components/footer/Footer";
 
 function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation()
