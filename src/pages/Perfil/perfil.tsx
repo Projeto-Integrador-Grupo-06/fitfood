@@ -20,7 +20,7 @@ function classificacaoImc(imc: number): string {
     return "Obesidade";
 }
 
-export default function perfil() {
+export default function Perfil() {
     const usuario: Usuario = {
         nome: "Giovanna Mendes",
         sexo: "Feminino",
@@ -35,7 +35,7 @@ export default function perfil() {
     };
 
     return (
-        <main className="min-h-screen bg-[#F0F0CF] py-12 px-8">
+        <main className="min-h-screen bg-[#F0F0CF] py-123 px-8">
             <div className="max-w-[1400px] mx-auto">
                
                 <section className="bg-[#839558] rounded-[36px] px-14 py-12 flex items-center gap-14">
