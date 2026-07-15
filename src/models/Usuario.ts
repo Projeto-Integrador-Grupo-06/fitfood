@@ -10,4 +10,8 @@ export default interface Usuario {
   altura: number
   imc: string
   alimentos: Alimentos[] | null
+  objetivo: 'emagrecimento' | 'hipertrofia' | 'manutencao'
+  atividade: 'sedentario' | 'moderada' | 'ativo'
+  sexo: 'feminino' | 'masculino'
+  idade: string
 }
