@@ -20,7 +20,7 @@ function classificacaoImc(imc: number): string {
     return "Obesidade";
 }
 
-export default function Perfil() {
+export default function perfil() {
     const usuario: Usuario = {
         nome: "Giovanna Mendes",
         sexo: "Feminino",
