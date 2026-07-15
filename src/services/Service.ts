@@ -1,10 +1,13 @@
-import axios from "axios";
+import axios from "axios"
 import type UsuarioLogin from "../models/UsuarioLogin";
 
-export const api = axios.create({
-  baseURL: "https://sistema-fit.onrender.com"
-});
+const api = axios.create({
+    baseURL: 'https://sistema-fit.onrender.com/'
+})
 
+export const cadastrarUsuario = async (url: string, dados: Object, setDados: Function) => {
+    const resposta = await api.post(url, dados)
+    setDados(resposta.data)
 export async function login(
   url: string,
   dados: UsuarioLogin,

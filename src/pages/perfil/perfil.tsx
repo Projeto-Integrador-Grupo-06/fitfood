@@ -11,21 +11,26 @@ function classificacaoImc(imc: number): string {
 }
 
 export default function Perfil() {
-    const usuario: Usuario = {
-        nome: "Giovanna Mendes",
-        sexo: "Feminino",
-        idade: 18,
-        objetivo: "Emagrecer",
-        altura: 165,
-        peso: 60,
-        atividade: "Moderada",
-        tmb: 1350,
-        imc: 22,
-        caloriasRecomendadas: 1700,
-    };
+
+    const [usuario, setUsuario] = useState<Usuario>({} as Usuario);
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:8080/usuarios/1")
+            .then((response) => {
+                setUsuario(response.data);
+            })
+            .catch((error) => {
+                console.log("Erro ao buscar usuário:", error);
+            });
+
+    }, []);
+
+    const valorImc = Number(usuario.imc);
 
     return (
-        <main className="min-h-screen bg-[#F0F0CF] py-123 px-8">
+        <main className="min-h-screen bg-[#F0F0CF] py-12 px-8">
+
             <div className="max-w-[1400px] mx-auto">
 
                 {/* PERFIL */}

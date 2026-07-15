@@ -10,6 +10,7 @@ import RegistroAlimentar from "./pages/registroalimentar/RegistroAlimentar";
 import Sobre from "./pages/sobre/Sobre";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Slides from './pages/slides/Slides'
 
 function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation()
@@ -18,7 +19,6 @@ function Layout({ children }: { children: React.ReactNode }) {
   if (esconderLayout) {
     return <main className="flex-1">{children}</main>
   }
-
   return (
     <>
       <Navbar />
@@ -45,11 +45,11 @@ function App() {
             <Route path="/perfil" element={<Perfil />} />
             <Route path="/registro-alimentar" element={<RegistroAlimentar />} />
             <Route path="/sobre" element={<Sobre />} />
+            <Route path="/apresentacao" element={<Slides />} />
           </Routes>
         </Layout>
       </div>
     </AuthProvider>
   );
 }
-
 export default App;
