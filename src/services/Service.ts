@@ -32,3 +32,22 @@ export async function login(
     throw error;
   }
 }
+
+export async function buscar(
+  url: string,
+  setDados: Function,
+  header: Object
+) {
+  const resposta = await api.get(url, header);
+  setDados(resposta.data);
+}
+
+export async function atualizar(
+  url: string,
+  dados: Object,
+  setDados: Function,
+  header: Object
+) {
+  const resposta = await api.put(url, dados, header);
+  setDados(resposta.data);
+}

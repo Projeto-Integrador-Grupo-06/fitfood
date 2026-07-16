@@ -1,20 +1,8 @@
-import { useEffect, useState } from "react";
-import { UserCircle } from "@phosphor-icons/react";
-import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { UserCircle, Fire } from "@phosphor-icons/react";
+import { AuthContext } from "../../contexts/AuthContext";
 import type Usuario from "../../models/Usuario";
-
-interface Usuario {
-    nome: string;
-    sexo: string;
-    idade: number;
-    objetivo: string;
-    altura: number;
-    peso: number;
-    atividade: string;
-    tmb: number;
-    imc: number;
-    caloriasRecomendadas: number;
-}
+import { buscar } from "../../services/Service";
 
 function classificacaoImc(imc: number): string {
     if (imc < 18.5) return "Abaixo do peso";
@@ -25,35 +13,140 @@ function classificacaoImc(imc: number): string {
 
 export default function Perfil() {
 
+    const {
+        usuario: usuarioLogado,
+        dadosFisicos,
+        setDadosFisicos
+    } = useContext(AuthContext);
+
     const [usuario, setUsuario] = useState<Usuario>({} as Usuario);
+
+    const [abrirModal, setAbrirModal] = useState(false);
+
+    const [resultado, setResultado] = useState({
+        imc: 0,
+        tmb: 0,
+        calorias: 0,
+    });
+
 
     useEffect(() => {
 
-        axios
-            .get("http://localhost:8080/usuarios/1")
-            .then((response) => {
-                setUsuario(response.data);
-            })
-            .catch((error) => {
-                console.log("Erro ao buscar usuário:", error);
-            });
+        async function buscarUsuario() {
 
-    }, []);
+            try {
 
+                await buscar(
+                    `/usuarios/${usuarioLogado.id}`,
+                    setUsuario,
+                    {
+                        headers: {
+                            Authorization: usuarioLogado.token,
+                        },
+                    }
+                );
 
-    const valorImc = Number(usuario.imc);
+            } catch (error) {
 
+                console.log(error);
+
+            }
+
+        }
+
+        if (usuarioLogado.id !== 0) {
+            buscarUsuario();
+        }
+
+    }, [usuarioLogado.id, usuarioLogado.token]);
+
+    function calcularResultados() {
+
+        const peso = Number(usuario.peso);
+        const altura = Number(usuario.altura);
+        const idade = Number(dadosFisicos.idade);
+
+        if (
+            peso <= 0 ||
+            altura <= 0 ||
+            idade <= 0
+        ) {
+            return;
+        }
+
+        let tmb =
+            10 * peso +
+            6.25 * altura -
+            5 * idade;
+
+        tmb =
+            dadosFisicos.sexo === "masculino"
+                ? tmb + 5
+                : tmb - 161;
+
+        const fatorAtividade = {
+            sedentario: 1.2,
+            moderada: 1.45,
+            ativo: 1.725,
+        };
+
+        let kcal =
+            tmb *
+            fatorAtividade[dadosFisicos.atividade];
+
+        if (dadosFisicos.objetivo === "emagrecimento") {
+            kcal -= 400;
+        }
+
+        if (dadosFisicos.objetivo === "hipertrofia") {
+            kcal += 400;
+        }
+
+        const alturaImc = altura / 100;
+
+        const imc = peso / (alturaImc * alturaImc);
+
+        setResultado({
+            imc,
+            tmb: Math.round(tmb),
+            calorias: Math.round(kcal),
+        });
+
+        setAbrirModal(false);
+    }
+
+    function atualizarDados(
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) {
+        setDadosFisicos({
+            ...dadosFisicos,
+            [e.target.name]:
+                e.target.type === "number"
+                    ? Number(e.target.value)
+                    : e.target.value,
+        });
+    }
 
     return (
         <main className="min-h-screen bg-[#F0F0CF] py-12 px-8">
 
             <div className="max-w-[1400px] mx-auto">
 
+                <section className="relative bg-[#839558] rounded-[36px] px-14 py-12 flex items-center gap-14">
 
+                    {/* Botão do modal */}
+                    <button
+                        onClick={() => setAbrirModal(true)}
+                        className="absolute top-8 right-8 w-14 h-14 rounded-full bg-[#0E3322] hover:scale-105 transition-all flex items-center justify-center"
+                    >
+                        <Fire
+                            size={28}
+                            weight="fill"
+                            className="text-[#F0F0CF]"
+                        />
+                    </button>
 
-                <section className="bg-[#839558] rounded-[36px] px-14 py-12 flex items-center gap-14">
-
-
+                    {/* Foto */}
                     <div className="w-[260px] flex justify-center">
 
                         {usuario.foto ? (
@@ -76,32 +169,32 @@ export default function Perfil() {
 
                     </div>
 
-
-
+                    {/* Dados */}
                     <div className="flex-1">
 
-
-                        <h1 className="font-camera text-[64px] leading-none text-[#F0F0CF] mb-8">
+                        <h1 className="font-camera text-[64px] leading-none text-[#F0F0CF]">
 
                             {usuario.nome || "Usuário"}
 
                         </h1>
 
+                        <p className="font-creato text-[#F0F0CF] text-2xl mt-3">
 
+                            {usuario.usuario}
 
-                        <div className="grid grid-cols-2 gap-x-16 gap-y-4">
+                        </p>
 
+                        <div className="mt-10 grid grid-cols-2 gap-y-5">
 
                             <p className="font-creato text-[#0E3322] text-xl">
 
                                 <span className="font-creato-medium">
-                                    Sexo:
+                                    Peso:
                                 </span>{" "}
 
-                                {usuario.sexo || "-"}
+                                {usuario.peso} kg
+
                             </p>
-
-
 
                             <p className="font-creato text-[#0E3322] text-xl">
 
@@ -109,68 +202,15 @@ export default function Perfil() {
                                     Altura:
                                 </span>{" "}
 
-                                {usuario.altura || "-"} cm
+                                {usuario.altura} cm
 
                             </p>
-
-
-
-                            <p className="font-creato text-[#0E3322] text-xl">
-
-                                <span className="font-creato-medium">
-                                    Idade:
-                                </span>{" "}
-
-                                {usuario.idade || "-"} anos
-
-                            </p>
-
-
-
-                            <p className="font-creato text-[#0E3322] text-xl">
-
-                                <span className="font-creato-medium">
-                                    Peso atual:
-                                </span>{" "}
-
-                                {usuario.peso || "-"} kg
-
-                            </p>
-
-
-
-                            <p className="font-creato text-[#0E3322] text-xl">
-
-                                <span className="font-creato-medium">
-                                    Objetivo:
-                                </span>{" "}
-
-                                {usuario.objetivo || "-"}
-
-                            </p>
-
-
-
-                            <p className="font-creato text-[#0E3322] text-xl">
-
-                                <span className="font-creato-medium">
-                                    Atividade:
-                                </span>{" "}
-
-                                {usuario.atividade || "-"}
-
-                            </p>
-
 
                         </div>
 
-
                     </div>
 
-
                 </section>
-
-
 
                 <h2 className="font-camera text-[64px] text-[#0E3322] mt-16 mb-8">
 
@@ -178,148 +218,612 @@ export default function Perfil() {
 
                 </h2>
 
-
-
-
                 <section className="grid grid-cols-3 gap-8">
 
-
-
-
-
+                    {/* TMB */}
 
                     <div className="bg-[#0E3322] rounded-[28px] p-8 flex flex-col justify-between min-h-[180px]">
 
-
                         <h3 className="font-creato text-[#F0F0CF] text-xl">
 
-                            Taxa Metabólica Basal (TMB):
+                            Taxa Metabólica Basal (TMB)
 
                         </h3>
-
-
 
                         <div className="flex items-end mt-8">
 
-
                             <span className="font-creato-medium text-[#839558] text-6xl">
 
-                                {usuario.tmb
-                                    ? usuario.tmb.toLocaleString("pt-BR")
-                                    : "-"}
+                                {resultado.tmb || "-"}
 
                             </span>
 
-
-
-                            <span className="font-creato text-[#839558] text-xl ml-2 mb-1">
-
-                                kcal/dia
-
-                            </span>
-
-
-                        </div>
-
-
-                    </div>
-
-
-
-
-                    <div className="bg-[#0E3322] rounded-[28px] p-8 flex flex-col justify-between min-h-[180px]">
-
-
-                        <h3 className="font-creato text-[#F0F0CF] text-xl">
-
-                            Índice de Massa Corporal (IMC)
-
-                        </h3>
-
-
-
-                        <div className="flex items-end flex-wrap mt-8">
-
-
-                            <span className="font-creato-medium text-[#839558] text-6xl">
-
-
-                                {!isNaN(valorImc)
-                                    ? valorImc.toFixed(1)
-                                    : "-"}
-
-
-                            </span>
-
-
-
-                            {!isNaN(valorImc) && (
+                            {resultado.tmb > 0 && (
 
                                 <span className="font-creato text-[#839558] text-xl ml-2 mb-1">
 
-                                    kg/m² - {classificacaoImc(valorImc)}
+                                    kcal/dia
 
                                 </span>
 
                             )}
 
-
                         </div>
-
 
                     </div>
 
-
-
-
+                    {/* IMC */}
 
                     <div className="bg-[#0E3322] rounded-[28px] p-8 flex flex-col justify-between min-h-[180px]">
 
-
                         <h3 className="font-creato text-[#F0F0CF] text-xl">
 
-                            Calorias diárias recomendadas:
+                            Índice de Massa Corporal
 
                         </h3>
 
-
-
-
-                        <div className="flex items-end mt-8">
-
+                        <div className="flex flex-wrap items-end mt-8">
 
                             <span className="font-creato-medium text-[#839558] text-6xl">
 
-
-                                {usuario.caloriasRecomendadas
-                                    ? usuario.caloriasRecomendadas.toLocaleString("pt-BR")
+                                {resultado.imc
+                                    ? resultado.imc.toFixed(1)
                                     : "-"}
 
-
                             </span>
 
+                            {resultado.imc > 0 && (
 
+                                <span className="font-creato text-[#839558] text-xl ml-2 mb-1">
 
-                            <span className="font-creato text-[#839558] text-xl ml-2 mb-1">
+                                    kg/m² - {classificacaoImc(resultado.imc)}
 
-                                kcal
+                                </span>
 
-                            </span>
-
+                            )}
 
                         </div>
 
+                    </div>
+
+                    {/* Calorias */}
+
+                    <div className="bg-[#0E3322] rounded-[28px] p-8 flex flex-col justify-between min-h-[180px]">
+
+                        <h3 className="font-creato text-[#F0F0CF] text-xl">
+
+                            Calorias diárias recomendadas
+
+                        </h3>
+
+                        <div className="flex items-end mt-8">
+
+                            <span className="font-creato-medium text-[#839558] text-6xl">
+
+                                {resultado.calorias || "-"}
+
+                            </span>
+
+                            {resultado.calorias > 0 && (
+
+                                <span className="font-creato text-[#839558] text-xl ml-2 mb-1">
+
+                                    kcal
+
+                                </span>
+
+                            )}
+
+                        </div>
 
                     </div>
 
-
-
                 </section>
 
-
             </div>
+            {abrirModal && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
 
+                    <div className="bg-[#F0F0CF] w-full max-w-xl rounded-[30px] p-10 relative">
 
+                        <button
+                            onClick={() => setAbrirModal(false)}
+                            className="absolute top-5 right-6 text-3xl text-[#0E3322] hover:scale-110 transition"
+                        >
+                            ×
+                        </button>
+
+                        <h2 className="font-camera text-5xl text-[#0E3322] mb-8 text-center">
+                            Avaliação Física
+                        </h2>
+
+                        <div className="space-y-5">
+
+                            {/* Peso */}
+
+                            <div>
+                                <label className="font-creato-medium text-[#0E3322]">
+                                    Peso (kg)
+                                </label>
+
+                                <input
+                                    type="number"
+                                    value={usuario.peso}
+                                    disabled
+                                    className="w-full mt-2 rounded-xl border p-3 bg-gray-200 cursor-not-allowed"
+                                />
+                            </div>
+
+                            {/* Altura */}
+
+                            <div>
+                                <label className="font-creato-medium text-[#0E3322]">
+                                    Altura (cm)
+                                </label>
+
+                                <input
+                                    type="number"
+                                    value={usuario.altura}
+                                    disabled
+                                    className="w-full mt-2 rounded-xl border p-3 bg-gray-200 cursor-not-allowed"
+                                />
+                            </div>
+
+                            {/* Idade */}
+
+                            <div>
+                                <label className="font-creato-medium text-[#0E3322]">
+                                    Idade
+                                </label>
+
+                                <input
+                                    type="number"
+                                    name="idade"
+                                    value={dadosFisicos.idade}
+                                    onChange={atualizarDados}
+                                    className="w-full mt-2 rounded-xl border p-3"
+                                />
+                            </div>
+
+                            {/* Sexo */}
+
+                            <div>
+
+                                <label className="font-creato-medium text-[#0E3322]">
+                                    Sexo
+                                </label>
+
+                                <select
+                                    name="sexo"
+                                    value={dadosFisicos.sexo}
+                                    onChange={atualizarDados}
+                                    className="w-full mt-2 rounded-xl border p-3"
+                                >
+                                    <option value="feminino">
+                                        Feminino
+                                    </option>
+
+                                    <option value="masculino">
+                                        Masculino
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            {/* Objetivo */}
+
+                            <div>
+
+                                <label className="font-creato-medium text-[#0E3322]">
+                                    Objetivo
+                                </label>
+
+                                <select
+                                    name="objetivo"
+                                    value={dadosFisicos.objetivo}
+                                    onChange={atualizarDados}
+                                    className="w-full mt-2 rounded-xl border p-3"
+                                >
+
+                                    <option value="emagrecimento">
+                                        Emagrecimento
+                                    </option>
+
+                                    <option value="hipertrofia">
+                                        Hipertrofia
+                                    </option>
+
+                                    <option value="manutencao">
+                                        Manutenção
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            {/* Atividade */}
+
+                            <div>
+
+                                <label className="font-creato-medium text-[#0E3322]">
+                                    Atividade Física
+                                </label>
+
+                                <select
+                                    name="atividade"
+                                    value={dadosFisicos.atividade}
+                                    onChange={atualizarDados}
+                                    className="w-full mt-2 rounded-xl border p-3"
+                                >
+
+                                    <option value="sedentario">
+                                        Sedentário
+                                    </option>
+
+                                    <option value="moderada">
+                                        Moderada
+                                    </option>
+
+                                    <option value="ativo">
+                                        Muito ativo
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <button
+                                onClick={calcularResultados}
+                                className="w-full bg-[#0E3322] text-[#F0F0CF] py-4 rounded-xl font-creato-medium text-lg hover:scale-[1.02] transition mt-8"
+                            >
+                                Calcular
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            )}
         </main>
     );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { useEffect, useState } from "react";
+// import { UserCircle } from "@phosphor-icons/react";
+// import axios from "axios";
+// import type Usuario from "../../models/Usuario";
+
+// interface Usuario {
+//     nome: string;
+//     sexo: string;
+//     idade: number;
+//     objetivo: string;
+//     altura: number;
+//     peso: number;
+//     atividade: string;
+//     tmb: number;
+//     imc: number;
+//     caloriasRecomendadas: number;
+// }
+
+// function classificacaoImc(imc: number): string {
+//     if (imc < 18.5) return "Abaixo do peso";
+//     if (imc < 25) return "Peso adequado";
+//     if (imc < 30) return "Sobrepeso";
+//     return "Obesidade";
+// }
+
+// export default function Perfil() {
+
+//     const [usuario, setUsuario] = useState<Usuario>({} as Usuario);
+
+//     useEffect(() => {
+
+//         axios
+//             .get("http://localhost:8080/usuarios/1")
+//             .then((response) => {
+//                 setUsuario(response.data);
+//             })
+//             .catch((error) => {
+//                 console.log("Erro ao buscar usuário:", error);
+//             });
+
+//     }, []);
+
+
+//     const valorImc = Number(usuario.imc);
+
+
+//     return (
+//         <main className="min-h-screen bg-[#F0F0CF] py-12 px-8">
+
+//             <div className="max-w-[1400px] mx-auto">
+
+
+
+//                 <section className="bg-[#839558] rounded-[36px] px-14 py-12 flex items-center gap-14">
+
+
+//                     <div className="w-[260px] flex justify-center">
+
+//                         {usuario.foto ? (
+
+//                             <img
+//                                 src={usuario.foto}
+//                                 alt={usuario.nome}
+//                                 className="w-[250px] h-[250px] rounded-full object-cover"
+//                             />
+
+//                         ) : (
+
+//                             <UserCircle
+//                                 size={250}
+//                                 weight="fill"
+//                                 className="text-[#D9D9D9]"
+//                             />
+
+//                         )}
+
+//                     </div>
+
+
+
+//                     <div className="flex-1">
+
+
+//                         <h1 className="font-camera text-[64px] leading-none text-[#F0F0CF] mb-8">
+
+//                             {usuario.nome || "Usuário"}
+
+//                         </h1>
+
+
+
+//                         <div className="grid grid-cols-2 gap-x-16 gap-y-4">
+
+
+//                             <p className="font-creato text-[#0E3322] text-xl">
+
+//                                 <span className="font-creato-medium">
+//                                     Sexo:
+//                                 </span>{" "}
+
+//                                 {usuario.sexo || "-"}
+//                             </p>
+
+
+
+//                             <p className="font-creato text-[#0E3322] text-xl">
+
+//                                 <span className="font-creato-medium">
+//                                     Altura:
+//                                 </span>{" "}
+
+//                                 {usuario.altura || "-"} cm
+
+//                             </p>
+
+
+
+//                             <p className="font-creato text-[#0E3322] text-xl">
+
+//                                 <span className="font-creato-medium">
+//                                     Idade:
+//                                 </span>{" "}
+
+//                                 {usuario.idade || "-"} anos
+
+//                             </p>
+
+
+
+//                             <p className="font-creato text-[#0E3322] text-xl">
+
+//                                 <span className="font-creato-medium">
+//                                     Peso atual:
+//                                 </span>{" "}
+
+//                                 {usuario.peso || "-"} kg
+
+//                             </p>
+
+
+
+//                             <p className="font-creato text-[#0E3322] text-xl">
+
+//                                 <span className="font-creato-medium">
+//                                     Objetivo:
+//                                 </span>{" "}
+
+//                                 {usuario.objetivo || "-"}
+
+//                             </p>
+
+
+
+//                             <p className="font-creato text-[#0E3322] text-xl">
+
+//                                 <span className="font-creato-medium">
+//                                     Atividade:
+//                                 </span>{" "}
+
+//                                 {usuario.atividade || "-"}
+
+//                             </p>
+
+
+//                         </div>
+
+
+//                     </div>
+
+
+//                 </section>
+
+
+
+//                 <h2 className="font-camera text-[64px] text-[#0E3322] mt-16 mb-8">
+
+//                     Resultados
+
+//                 </h2>
+
+
+
+
+//                 <section className="grid grid-cols-3 gap-8">
+
+
+
+
+
+
+//                     <div className="bg-[#0E3322] rounded-[28px] p-8 flex flex-col justify-between min-h-[180px]">
+
+
+//                         <h3 className="font-creato text-[#F0F0CF] text-xl">
+
+//                             Taxa Metabólica Basal (TMB):
+
+//                         </h3>
+
+
+
+//                         <div className="flex items-end mt-8">
+
+
+//                             <span className="font-creato-medium text-[#839558] text-6xl">
+
+//                                 {usuario.tmb
+//                                     ? usuario.tmb.toLocaleString("pt-BR")
+//                                     : "-"}
+
+//                             </span>
+
+
+
+//                             <span className="font-creato text-[#839558] text-xl ml-2 mb-1">
+
+//                                 kcal/dia
+
+//                             </span>
+
+
+//                         </div>
+
+
+//                     </div>
+
+
+
+
+//                     <div className="bg-[#0E3322] rounded-[28px] p-8 flex flex-col justify-between min-h-[180px]">
+
+
+//                         <h3 className="font-creato text-[#F0F0CF] text-xl">
+
+//                             Índice de Massa Corporal (IMC)
+
+//                         </h3>
+
+
+
+//                         <div className="flex items-end flex-wrap mt-8">
+
+
+//                             <span className="font-creato-medium text-[#839558] text-6xl">
+
+
+//                                 {!isNaN(valorImc)
+//                                     ? valorImc.toFixed(1)
+//                                     : "-"}
+
+
+//                             </span>
+
+
+
+//                             {!isNaN(valorImc) && (
+
+//                                 <span className="font-creato text-[#839558] text-xl ml-2 mb-1">
+
+//                                     kg/m² - {classificacaoImc(valorImc)}
+
+//                                 </span>
+
+//                             )}
+
+
+//                         </div>
+
+
+//                     </div>
+
+
+
+
+
+//                     <div className="bg-[#0E3322] rounded-[28px] p-8 flex flex-col justify-between min-h-[180px]">
+
+
+//                         <h3 className="font-creato text-[#F0F0CF] text-xl">
+
+//                             Calorias diárias recomendadas:
+
+//                         </h3>
+
+
+
+
+//                         <div className="flex items-end mt-8">
+
+
+//                             <span className="font-creato-medium text-[#839558] text-6xl">
+
+
+//                                 {usuario.caloriasRecomendadas
+//                                     ? usuario.caloriasRecomendadas.toLocaleString("pt-BR")
+//                                     : "-"}
+
+
+//                             </span>
+
+
+
+//                             <span className="font-creato text-[#839558] text-xl ml-2 mb-1">
+
+//                                 kcal
+
+//                             </span>
+
+
+//                         </div>
+
+
+//                     </div>
+
+
+
+//                 </section>
+
+
+//             </div>
+
+
+//         </main>
+//     );
+// }
