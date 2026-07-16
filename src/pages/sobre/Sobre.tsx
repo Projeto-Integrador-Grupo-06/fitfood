@@ -8,64 +8,75 @@ import "swiper/css/pagination";
 function Sobre() {
   return (
     <div>
-      <h1 className="text-[#0E3322] text-center text-4xl md:text-6xl lg:text-8xl font-camera m-5">
-        Sobre o Grupo
-      </h1>
-
       <div className="flex flex-col lg:flex-row items-center justify-center gap-8 px-5">
         <img
           className="w-full max-w-[724px] h-auto rounded-[30px] p-5"
-          src="https://i.postimg.cc/VkLnHxrT/z-Embarque-(131).jpg"
+          src="../src/midia/Grupo_fitFood.png"
           alt=""
         />
-        <p className="font-creato text-[#0E3322] text-justify w-full max-w-[490px] lg:pt-36">
-          Somos uma equipe de desenvolvedores do Bootcamp Java da Generation
-          Brasil, reunidos para desenvolver o Fit Food, um projeto que une
-          tecnologia e saúde para incentivar hábitos alimentares mais saudáveis.
-          Durante o desenvolvimento, colocamos em prática conhecimentos em
-          desenvolvimento Full Stack, banco de dados, UI/UX e trabalho
-          colaborativo, criando uma solução funcional, intuitiva e focada na
-          experiência do usuário
-        </p>
-      </div>
-
-      <div className="flex flex-col lg:flex-row bg-[#839558]/70 w-[95%] mx-auto rounded-r-[20px] p-5 gap-8">
-        <div className="flex flex-col justify-center  items-center">
-          <h2 className="text-[#CA5030] font-camera  pl-2 text-4xl md:text-6xl lg:text-7xl">
-            Sobre o projeto
-          </h2>
-          <p className="text-justify p-5  m-5 w-[60%]  font-Creato">
-            O Fit Food é uma plataforma desenvolvida para ajudar pessoas a
-            organizarem e acompanharem sua alimentação de forma simples e
-            eficiente.O sistema permite registrar as refeições diárias com
-            cálculo automático de calorias, acessar receitas saudáveis, calcular
-            o Índice de Massa Corporal (IMC) e acompanhar toda a evolução
-            alimentar. Com uma interface moderna e intuitiva, o Fit Food oferece
-            as ferramentas necessárias para que cada usuário monitore seus
-            hábitos, acompanhe seu progresso e tenha mais controle sobre sua
-            jornada rumo a uma vida mais saudável.
+        <div>
+          <h1 className="text-[#0E3322] text-justify text-4xl lg:text-7xl font-camera ">
+            Generation
+          </h1>
+          <p className="font-creato text-[#0E3322] text-justify w-full max-w-[490px] pl-2">
+            Somos uma equipe de desenvolvedores do Bootcamp Java da Generation
+            Brasil, reunidos para desenvolver o Fit Food, um projeto que une
+            tecnologia e saúde para incentivar hábitos alimentares mais
+            saudáveis. Durante o desenvolvimento, colocamos em prática
+            conhecimentos em desenvolvimento Full Stack, banco de dados, UI/UX e
+            trabalho colaborativo, criando uma solução funcional, intuitiva e
+            focada na experiência do usuário
           </p>
         </div>
-        <img
-          className="w-4xl"
-          src="https://i.postimg.cc/gkzz7B0R/logo-fitfood.png"
-          alt=""
-        />
       </div>
 
-    <div>
-        <h2 className="text-[#0E3322] font-camera  text-center p-5 text-4xl md:text-6xl lg:text-7xl">
-        Time de Desenvolvedores
+      <section className="w-full lg:w-[95%] bg-[#839558]/70 rounded-none lg:rounded-r-[20px] overflow-hidden">
+  <div className="flex flex-col lg:flex-row items-center">
+
+    {/* Texto */}
+    <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 py-8 sm:px-8 md:px-12 lg:px-14 lg:py-12">
+      <h2 className="text-[#0E3322] font-camera text-center lg:text-left text-4xl sm:text-5xl lg:text-6xl mb-6">
+        Sobre o Projeto
       </h2>
-      <p className="w-[60%] mx-auto flex items-center justify-center text-center font-creato text-[#0E3322] font-camera">
-        Nosso time  é composto por Product Owner (PO), Scrum
-        Master, desenvolvedores e equipe de testes, que atuam de forma
-        colaborativa em todas as etapas do projeto. Em conjunto, realizamos a
-        prototipação, o desenvolvimento das funcionalidades e a validação das
-        entregas, sempre seguindo as boas práticas de desenvolvimento ágil,
-        qualidade de software e foco na experiência do usuário.
+
+      <p className="font-creato text-[#0E3322] text-justify text-sm sm:text-base lg:text-lg leading-7">
+        O Fit Food é uma plataforma desenvolvida para ajudar pessoas a
+        organizarem e acompanharem sua alimentação de forma simples e
+        eficiente. O sistema permite registrar as refeições diárias com
+        cálculo automático de calorias, acessar receitas saudáveis,
+        calcular o Índice de Massa Corporal (IMC) e acompanhar toda a
+        evolução alimentar. Com uma interface moderna e intuitiva, o Fit
+        Food oferece as ferramentas necessárias para que cada usuário
+        monitore seus hábitos, acompanhe seu progresso e tenha mais
+        controle sobre sua jornada rumo a uma vida mais saudável.
       </p>
     </div>
+
+    {/* Imagem */}
+    <div className="w-full lg:w-1/2">
+      <img
+        src="../src/midia/Logo.png"
+        alt="Sobre o Projeto"
+        className="w-full h-[350px] sm:h-[350px] lg:h-full object-cover"
+      />
+    </div>
+
+  </div>
+</section>
+
+      <div>
+        <h2 className="text-[#0E3322] font-camera  text-center p-5 text-4xl md:text-6xl lg:text-7xl">
+          Time de Desenvolvedores
+        </h2>
+        <p className="w-[60%] mx-auto flex items-center justify-center text-center font-creato text-[#0E3322] font-camera">
+          Nosso time é composto por Product Owner (PO), Scrum Master,
+          desenvolvedores e equipe de testes, que atuam de forma colaborativa em
+          todas as etapas do projeto. Em conjunto, realizamos a prototipação, o
+          desenvolvimento das funcionalidades e a validação das entregas, sempre
+          seguindo as boas práticas de desenvolvimento ágil, qualidade de
+          software e foco na experiência do usuário.
+        </p>
+      </div>
 
       <div className="flex items-center justify-center bg-[#F6F3D7] py-10">
         <Swiper
@@ -112,7 +123,7 @@ function Sobre() {
                       lg:h-[350px]
                       rounded-[10px]
                       object-cover"
-                  src="https://i.postimg.cc/SQHMBM5Q/Isabela-Rodrigues-(2).jpg"
+                  src="../src/midia/IsabelaRodrigues.jpg"
                   alt="Isabella Rodrigues"
                 />
               </div>
@@ -188,7 +199,7 @@ function Sobre() {
                     lg:h-[350px]
                     rounded-[10px]
                     object-cover"
-                  src="https://cdn.discordapp.com/attachments/1489362734075084948/1526936712314490940/ChatGPT_Image_16_de_jun._de_2026_19_04_50.png?ex=6a5a27a1&is=6a58d621&hm=2c43f098704e04272ba564e43d1c70f252af9837ccac1bc99adaea6655b310a4"
+                  src="../src/midia/GiovannaMendes.jpg"
                   alt="Giovanna Mendes"
                 />
               </div>
@@ -235,7 +246,7 @@ function Sobre() {
           {/*Bianca Casagrande*/}
           <SwiperSlide>
             <div
-                          className="  w-full
+              className="  w-full
                 min-h-[450px]
                 bg-[#BFC693]
                 rounded-[20px]
@@ -263,7 +274,7 @@ function Sobre() {
                     lg:h-[350px]
                     rounded-[10px]
                     object-cover"
-                  src="https://cdn.discordapp.com/attachments/1489362734075084948/1526958887243092006/1718278353455.jpeg?ex=6a58eac8&is=6a579948&hm=1a400b20bcf0faa945054cccea5ad4d8dbcc7777de170092646cda88eca6e93c"
+                  src="../src/midia/BiancaCasagrande.jpg"
                   alt="Bianca Casagrande"
                 />
               </div>
@@ -338,7 +349,7 @@ function Sobre() {
                   lg:h-[350px]
                   rounded-[10px]
                   object-cover"
-                  src="https://cdn.discordapp.com/attachments/1489362734075084948/1526958526839263242/Copia_de_Jhonaton_Oliveira_3.jpg?ex=6a58ea72&is=6a5798f2&hm=d0a05756139b6e2fcce2114bfcf0d7b7b2d8d537fd67c10ea307a6734f579233"
+                  src="../src/midia/JhonatanOliveira.jpg"
                   alt="Jhonatan Oliveira"
                 />
               </div>
@@ -413,7 +424,7 @@ function Sobre() {
                     lg:h-[350px]
                     rounded-[10px]
                     object-cover"
-                  src="https://avatars.githubusercontent.com/u/247451997?v=4%3Fs%3D400"
+                  src="../src/midia/DayaneSantana.jpg"
                   alt="Dayane Santana"
                 />
               </div>
@@ -488,7 +499,7 @@ function Sobre() {
                       lg:h-[350px]
                       rounded-[10px]
                       object-cover"
-                  src="https://cdn.discordapp.com/attachments/1489362734075084948/1526939990884483182/IMG_3645.jpg?ex=6a5a2aaf&is=6a58d92f&hm=0d3e21fd8498d8b91bea07cb5fdbec489d7b3d26940a85e058159a3767875e30"
+                  src="../src/midia/JackelinePessoa.jpg"
                 />
               </div>
 
@@ -562,7 +573,7 @@ function Sobre() {
                     lg:h-[350px]
                     rounded-[10px]
                     object-cover"
-                  src="https://cdn.discordapp.com/attachments/1489362734075084948/1526937695388172288/WhatsApp_Image_2026-07-15_at_10.04.12.jpeg?ex=6a5a288b&is=6a58d70b&hm=e72295ed9e884d65b196edbbfdbba9bcb8398a7c7188357584a1fe96515eaf4c"
+                  src="../src/midia/RafaelScherer.jpg"
                   alt="Rafael Scherer"
                 />
               </div>
