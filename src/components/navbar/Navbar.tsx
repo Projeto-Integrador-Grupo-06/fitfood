@@ -1,13 +1,19 @@
 import { Link, useLocation } from "react-router-dom";
-import logo from "../assets/img/logo-fitfood.png";
+import logo from "../../assets/img/logo-fitfood.png";
 
 function Navbar() {
   const { pathname } = useLocation();
 
+  const rotasSemNavbar = ["/", "/cadastro"];
+
+  if (rotasSemNavbar.includes(pathname)) {
+    return null;
+  }
+
   const menu = [
     {
       nome: "HOME",
-      rota: "/",
+      rota: "/home",
     },
     {
       nome: "REGISTRO ALIMENTAR",
@@ -21,12 +27,12 @@ function Navbar() {
 
   return (
     <header
-      className={`w-full flex items-center justify-between px-8 py-4 z-50 transition-all duration-300 ${pathname === "/"
-          ? "absolute top-0 left-0 bg-transparent"
-          : "relative bg-[#0E3322]"
+      className={`w-full flex items-center justify-between px-8 py-4 z-50 transition-all duration-300 ${pathname === "/home"
+        ? "absolute top-0 left-0 bg-transparent"
+        : "relative bg-[#0E3322]"
         }`}
     >
-      <Link to="/">
+      <Link to="/home">
         <img
           src={logo}
           alt="Fit Food"
@@ -43,8 +49,8 @@ function Navbar() {
               key={item.rota}
               to={item.rota}
               className={`relative pb-2 transition-colors duration-300 ${ativo
-                  ? "text-white"
-                  : "text-white hover:text-[#D9D9D9]"
+                ? "text-white"
+                : "text-white hover:text-[#D9D9D9]"
                 }`}
             >
               {item.nome}
