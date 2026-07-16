@@ -3,6 +3,19 @@ import { UserCircle } from "@phosphor-icons/react";
 import axios from "axios";
 import type Usuario from "../../models/Usuario";
 
+interface Usuario {
+    nome: string;
+    sexo: string;
+    idade: number;
+    objetivo: string;
+    altura: number;
+    peso: number;
+    atividade: string;
+    tmb: number;
+    imc: number;
+    caloriasRecomendadas: number;
+}
+
 function classificacaoImc(imc: number): string {
     if (imc < 18.5) return "Abaixo do peso";
     if (imc < 25) return "Peso adequado";
