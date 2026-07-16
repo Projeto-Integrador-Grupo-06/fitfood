@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import fundoHome from "../../assets/img/fundo-home.webp";
-import gptHome from "../../assets/img/gpt-home.png";
 import carnebatata from "../../assets/img/carne-batata.png";
 import frangoarroz from "../../assets/img/frango-arroz.png";
 import omeletelegumes from "../../assets/img/omelete-legumes.png";
@@ -69,15 +68,15 @@ const categorias: Categoria[] = [
     receitas: [
       {
         id: 1,
-        nome: "Carne com Purê",
+        nome: "Carne com Pure",
         kcal: 450,
         imagem: carnebatata,
         ingredientes: [
           "120 g de carne magra",
-          "150 g de purê de batata",
+          "150 g de pure de batata",
           "Salada de alface",
         ],
-        modoPreparo: "Grelhe a carne, prepare o purê e sirva com a salada.",
+        modoPreparo: "Grelhe a carne, prepare o pure e sirva com a salada.",
       },
       {
         id: 2,
@@ -139,15 +138,15 @@ const categorias: Categoria[] = [
         imagem: omeletelegumes,
         ingredientes: ["2 ovos", "50 g de espinafre", "50 g de tomate"],
         modoPreparo:
-          "Bata os ovos, misture os legumes e cozinhe em uma frigideira antiaderente.",
+          "Bata os ovos, misture os legumes e sirva.",
       },
       {
         id: 3,
-        nome: "Tilápia com Abobrinha",
+        nome: "Tilapia com Abobrinha",
         kcal: 170,
         imagem: tilapiaabobrinha,
-        ingredientes: ["120 g de filé de tilápia", "100 g de abobrinha"],
-        modoPreparo: "Grelhe a tilápia, refogue a abobrinha e sirva.",
+        ingredientes: ["120 g de filé de tilapia", "100 g de abobrinha"],
+        modoPreparo: "Grelhe a tilapia, refogue a abobrinha e sirva.",
       },
     ],
   },
@@ -193,7 +192,7 @@ function Home() {
               criado para ajudar você a cuidar da sua saúde de forma simples.
             </p>
             <Link
-              to="/cadastro"
+              to="/registro-alimentar"
               className="inline-block bg-[#CA5030] text-white font-creato-medium px-8 py-3 rounded-full hover:brightness-95 transition"
             >
               COMECE JÁ
@@ -208,11 +207,11 @@ function Home() {
                   alt={item.titulo}
                   className="w-full h-32 md:h-40 object-cover rounded-t-xl"
                 />
-                <div className="bg-[#839558] text-white text-center rounded-b-xl p-3 flex-1">
-                  <p className="font-creato-medium text-xs md:text-sm mb-1">
+                <div className="bg-[#839558] text-center rounded-b-xl p-3 flex-1">
+                  <p className="font-camera text-white text-xs md:text-sm mb-1">
                     {item.titulo}
                   </p>
-                  <p className="text-[10px] md:text-xs opacity-90">
+                  <p className="font-creato text-[#0E3322] text-[10px] md:text-xs">
                     {item.descricao}
                   </p>
                 </div>
@@ -251,9 +250,25 @@ function Home() {
         </div>
       </section>
 
+      {/* Perfil Nutricional */}
+      <section className="bg-[#839558] py-6 px-4 text-center">
+        <h2 className="font-camera text-[#0E3322] text-4xl md:text-5xl mb-3">
+          Perfil Nutricional
+        </h2>
+        <p className="text-[#0E3322] text-sm md:text-base mb-6">
+          informe seus dados para realizar sua análise corporal
+        </p>
+        <Link
+          to="/perfil"
+          className="inline-block bg-[#CA5030] text-white font-creato-medium px-8 py-3 rounded-full hover:brightness-95 transition"
+        >
+          faça agora
+        </Link>
+      </section>
+
       {/* Receitas */}
       <section className="bg-[#F0F0CF] px-4 pb-16">
-        <h2 className="font-camera text-4xl md:text-5xl text-center mb-2">
+        <h2 className="font-camera text-4xl pt-16 md:text-5xl text-center mb-20">
           Receitas
         </h2>
 
@@ -271,20 +286,20 @@ function Home() {
             {[receita1, receita2].map((receita) => (
               <div
                 key={receita.id}
-                className="rounded-2xl overflow-hidden shadow-lg bg-[#839558] flex flex-col sm:flex-row"
+                className="rounded-2xl overflow-hidden shadow-lg bg-[#839558] flex flex-col sm:flex-row sm:h-80"
               >
-                <div className="relative sm:w-2/5 shrink-0">
+                <div className="relative sm:w-2/5 shrink-0 h-48 sm:h-full">
                   <img
                     src={receita.imagem}
                     alt={receita.nome}
-                    className="w-full h-48 sm:h-full object-cover"
+                    className="w-full h-full object-cover"
                   />
                   <span className="absolute top-3 left-3 bg-white/90 text-[#0E3322] px-3 py-1 rounded-full text-xs font-creato-medium">
                     Total: ≈ {receita.kcal} kcal
                   </span>
                 </div>
 
-                <div className="text-white p-6 flex-1">
+                <div className="text-white p-6 flex-1 overflow-y-auto">
                   <h3 className="font-camera text-2xl mb-3">{receita.nome}</h3>
 
                   <p className="font-creato-medium mb-2">Ingredientes</p>
@@ -329,33 +344,6 @@ function Home() {
               />
             )
           )}
-        </div>
-      </section>
-
-      {/* Sobre nós */}
-      <section className="bg-[#F0F0CF] px-4 pb-20">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <div>
-            <h2 className="font-camera text-4xl md:text-5xl mb-4">
-              Sobre nos
-            </h2>
-            <p className="text-xl text-justify leading-relaxed max-w-md">
-              Somos uma equipe de desenvolvedores Java Full Stack formada
-              durante o bootcamp da Generation Brasil. Unimos nossos
-              conhecimentos para criar o Fit Food, um projeto que incentiva
-              hábitos alimentares mais saudáveis por meio da tecnologia,
-              tornando o acompanhamento da alimentação simples, prático e
-              acessível.
-            </p>
-          </div>
-
-          <div className="flex justify-center">
-            <img
-              src={gptHome}
-              alt="Equipe Fit Food"
-              className="w-full max-w-md rounded-2xl"
-            />
-          </div>
         </div>
       </section>
     </div>
