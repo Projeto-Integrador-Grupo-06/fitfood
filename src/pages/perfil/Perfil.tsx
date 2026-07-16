@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
 import { UserCircle } from "@phosphor-icons/react";
+import axios from "axios";
+import type Usuario from "../../models/Usuario";
 
 interface Usuario {
     nome: string;
