@@ -106,7 +106,7 @@ function Cadastro() {
           <h1 className="font-camera text-[#839558] text-5xl text-center flex-col w-2/3 gap-4">
             Venha fazer parte do fitfood
           </h1>
-          <p className="text-[#0e3322] text-lg text-center font-creato">
+          <p className="text-[#0e3322] text-lg text-center font-creato text-xl">
             Crie sua conta e comece hoje a construir uma vida mais saudável
           </p>
           <div className="flex flex-col w-full">
@@ -346,7 +346,7 @@ function Cadastro() {
               className="rounded-3xl cursor-pointer text-white bg-[#ca5030] hover:bg-[#f7613b] w-1/2 py-2 flex justify-center"
             >
               {isLoading ? (
-                <MoonLoader color="ffffff" size={24} />
+                <MoonLoader color="#ffffff" size={24} />
               ) : (
                 <span>Cadastrar</span>
               )}
@@ -354,11 +354,11 @@ function Cadastro() {
           </div>
         </form>
       </div>
-      <div className="absolute right-0 top-28 z-50 pointer-events-none">
+      <div className="absolute right-0 top-5 z-50 pointer-events-none">
         <img
           src="https://i.imgur.com/hogHPOm.png"
           alt="Mascote FitFood"
-          className="h-40  w-auto translate-x-[2px]"
+          className="h-30  w-auto translate-x-[2px]"
         />
       </div>
     </>

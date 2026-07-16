@@ -185,7 +185,7 @@ function Home() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div className="text-center lg:text-left">
             <h1 className="font-camera text-6xl md:text-7xl mb-6">fit food</h1>
-            <p className="text-sm md:text-base leading-relaxed mb-8">
+            <p className=" leading-relaxed mb-8 font-creato text-xl text-justify">
               Atualmente, a rotina corrida faz com que muitas pessoas escolham
               alimentos apenas pela praticidade, deixando uma alimentação
               equilibrada em segundo plano. Pensando nisso, o Fit Food foi
