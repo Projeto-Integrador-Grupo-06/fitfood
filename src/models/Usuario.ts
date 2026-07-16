@@ -8,9 +8,9 @@ export default interface Usuario {
     senha: string;
     foto: string;
 
-    peso: number;
-    altura: number;
-    imc: string;
+    peso: number | null;
+    altura: number | null;
+    imc: string | null;
 
     alimentos: Alimentos[] | null;
 }

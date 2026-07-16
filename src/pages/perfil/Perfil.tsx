@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { UserCircle, Fire } from "@phosphor-icons/react";
-import { AuthContext } from "../../contexts/AuthContext";
 import type Usuario from "../../models/Usuario";
 import { buscar } from "../../services/Service";
+import type DadosFisicos from "../../models/DadosFisicos";
+import { AuthContext } from "../../contexts/AuthContext";
 
 function classificacaoImc(imc: number): string {
     if (imc < 18.5) return "Abaixo do peso";
@@ -19,15 +20,48 @@ export default function Perfil() {
         setDadosFisicos
     } = useContext(AuthContext);
 
-    const [usuario, setUsuario] = useState<Usuario>({} as Usuario);
+
+    const [usuario, setUsuario] = useState<Usuario>({
+        id: 0,
+        nome: "",
+        usuario: "",
+        senha: "",
+        foto: "",
+        peso: 0,
+        altura: 0,
+        imc: "",
+        alimentos: []
+    });
+
 
     const [abrirModal, setAbrirModal] = useState(false);
+
 
     const [resultado, setResultado] = useState({
         imc: 0,
         tmb: 0,
         calorias: 0,
     });
+
+
+    function atualizarUsuario(
+        e: React.ChangeEvent<HTMLInputElement>
+    ) {
+        setUsuario({
+            ...usuario,
+            [e.target.name]: e.target.value
+        });
+    }
+
+
+    function atualizarPesoAltura(
+        e: React.ChangeEvent<HTMLInputElement>
+    ) {
+        setUsuario({
+            ...usuario,
+            [e.target.name]: Number(e.target.value)
+        });
+    }
 
 
     useEffect(() => {
@@ -37,14 +71,26 @@ export default function Perfil() {
             try {
 
                 await buscar(
-                    `/usuarios/${usuarioLogado.id}`,
-                    setUsuario,
+                    "/usuarios/all",
+                    (usuarios: Usuario[]) => {
+
+                        const usuarioEncontrado = usuarios.find(
+                            (item) => item.id === usuarioLogado.id
+                        );
+
+
+                        if (usuarioEncontrado) {
+                            setUsuario(usuarioEncontrado);
+                        }
+
+                    },
                     {
                         headers: {
                             Authorization: usuarioLogado.token,
                         },
                     }
                 );
+
 
             } catch (error) {
 
@@ -54,17 +100,22 @@ export default function Perfil() {
 
         }
 
+
         if (usuarioLogado.id !== 0) {
             buscarUsuario();
         }
 
+
     }, [usuarioLogado.id, usuarioLogado.token]);
+
+
 
     function calcularResultados() {
 
         const peso = Number(usuario.peso);
         const altura = Number(usuario.altura);
         const idade = Number(dadosFisicos.idade);
+
 
         if (
             peso <= 0 ||
@@ -74,15 +125,19 @@ export default function Perfil() {
             return;
         }
 
+
         let tmb =
             10 * peso +
             6.25 * altura -
             5 * idade;
 
+
         tmb =
             dadosFisicos.sexo === "masculino"
                 ? tmb + 5
                 : tmb - 161;
+
+
 
         const fatorAtividade = {
             sedentario: 1.2,
@@ -90,21 +145,29 @@ export default function Perfil() {
             ativo: 1.725,
         };
 
+
         let kcal =
             tmb *
             fatorAtividade[dadosFisicos.atividade];
+
+
 
         if (dadosFisicos.objetivo === "emagrecimento") {
             kcal -= 400;
         }
 
+
         if (dadosFisicos.objetivo === "hipertrofia") {
             kcal += 400;
         }
 
+
+
         const alturaImc = altura / 100;
 
         const imc = peso / (alturaImc * alturaImc);
+
+
 
         setResultado({
             imc,
@@ -112,12 +175,16 @@ export default function Perfil() {
             calorias: Math.round(kcal),
         });
 
+
         setAbrirModal(false);
     }
+
+
 
     function atualizarDados(
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) {
+
         setDadosFisicos({
             ...dadosFisicos,
             [e.target.name]:
@@ -125,6 +192,7 @@ export default function Perfil() {
                     ? Number(e.target.value)
                     : e.target.value,
         });
+
     }
 
     return (
@@ -348,9 +416,10 @@ export default function Perfil() {
 
                                 <input
                                     type="number"
+                                    name="peso"
                                     value={usuario.peso}
-                                    disabled
-                                    className="w-full mt-2 rounded-xl border p-3 bg-gray-200 cursor-not-allowed"
+                                    onChange={atualizarUsuario}
+                                    className="..."
                                 />
                             </div>
 
@@ -363,9 +432,10 @@ export default function Perfil() {
 
                                 <input
                                     type="number"
+                                    name="altura"
                                     value={usuario.altura}
-                                    disabled
-                                    className="w-full mt-2 rounded-xl border p-3 bg-gray-200 cursor-not-allowed"
+                                    onChange={atualizarUsuario}
+                                    className="..."
                                 />
                             </div>
 
