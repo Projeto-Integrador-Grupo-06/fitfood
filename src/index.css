@@ -2,25 +2,26 @@
 
 @font-face {
   font-family: "Camera Obscura";
-  src: url("./assets/fonts/CameraObscura.otf");
+  src: url("./assets/fonts/CameraObscura.otf") format("opentype");
+  font-display: swap;
 }
 
 @font-face {
-  font-family: "Creato Display";
-  src: url("./assets/fonts/CreatoDisplay-Regular.otf");
+  font-family: "Creato Display Regular";
+  src: url("./assets/fonts/CreatoDisplay-Regular.otf") format("opentype");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Creato Display Medium";
-  src: url("./assets/fonts/CreatoDisplay-Medium.otf");
+  src: url("./assets/fonts/CreatoDisplay-Medium.otf") format("opentype");
+  font-display: swap;
 }
 
-.font-camera {
-  font-family: "Camera Obscura";
-}
-
-.font-creato {
-  font-family: "Creato Display";
+@font-face {
+  font-family: "Creato Display Bold";
+  src: url("./assets/fonts/CreatoDisplay-Bold.otf") format("opentype");
+  font-display: swap;
 }
 
 .font-creato-medium {
@@ -43,4 +44,8 @@
 .equipe-swiper .swiper-pagination-bullet-active {
   background: #CA5030;
   opacity: 1;
+@font-face {
+  font-family: "Creato Display Black";
+  src: url("./assets/fonts/CreatoDisplay-Black.otf") format("opentype");
+  font-display: swap;
 }
