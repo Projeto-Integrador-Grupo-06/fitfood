@@ -1,5 +1,14 @@
+import { useLocation } from "react-router-dom";
+
 function Footer() {
   const anoAtual = new Date().getFullYear();
+  const { pathname } = useLocation();
+
+  const rotasSemFooter = ["/", "/cadastro"];
+
+  if (rotasSemFooter.includes(pathname)) {
+    return null;
+  }
 
   return (
     <footer className="w-full bg-[#0E3322] py-6 px-4 text-center text-white">
