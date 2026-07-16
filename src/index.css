@@ -26,3 +26,21 @@
 .font-creato-medium {
   font-family: "Creato Display Medium";
 }
+
+/* Botões de navegação */
+.equipe-swiper .swiper-button-next,
+.equipe-swiper .swiper-button-prev {
+  color: #173E2A;
+}
+
+/* Bolinhas da paginação */
+.equipe-swiper .swiper-pagination-bullet {
+  background: #173E2A;
+  opacity: 0.5;
+}
+
+/* Bolinha ativa */
+.equipe-swiper .swiper-pagination-bullet-active {
+  background: #CA5030;
+  opacity: 1;
+}
