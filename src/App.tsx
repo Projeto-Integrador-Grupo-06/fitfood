@@ -2,7 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/footer/Footer";
-import Perfil from "./pages/perfil/perfil";
+import Perfil from "./pages/perfil/Perfil";
 import Cadastro from "./pages/cadastro/Cadastro";
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";

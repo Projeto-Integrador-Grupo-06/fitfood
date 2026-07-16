@@ -1,93 +1,78 @@
-import {createContext, useState, useEffect, type ReactNode,} from "react";
-import type UsuarioLogin from "../models/UsuarioLogin";
-import { login } from "../services/Service";
-import { ToastAlerta } from "../utils/ToastAlerta";
+import { createContext, useState, type ReactNode } from "react"
+import type UsuarioLogin from "../models/UsuarioLogin"
+import { login } from "../services/Service"
+import { ToastAlerta } from "../utils/ToastAlerta"
 
 interface AuthContextProps {
-  usuario: UsuarioLogin;
-  handleLogin: (
-    usuarioLogin: UsuarioLogin
-  ) => Promise<void>;
-  handleLogout: () => void;
-  isLoading: boolean;
+  usuario: UsuarioLogin
+  handleLogin: (usuarioLogin: UsuarioLogin) => Promise<boolean>
+  handleLogout: () => void
+  isLoading: boolean
 }
 
-const usuarioInicial: UsuarioLogin = {
-  id: 0,
-  nome: "",
-  usuario: "",
-  senha: "",
-  foto: "",
-  token: "",
-};
+const AuthContext = createContext<AuthContextProps>({
+  usuario: {
+    id: 0,
+    nome: "",
+    usuario: "",
+    senha: "",
+    foto: "",
+    token: ""
+  },
+  handleLogin: async () => false,
+  handleLogout: () => {},
+  isLoading: false
+})
 
-const AuthContext =
-  createContext<AuthContextProps>(
-    {} as AuthContextProps
-  );
+function AuthProvider({ children }: { children: ReactNode }) {
+  const [usuario, setUsuario] = useState<UsuarioLogin>({
+    id: 0,
+    nome: "",
+    usuario: "",
+    senha: "",
+    foto: "",
+    token: ""
+  })
 
-function AuthProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  const [usuario, setUsuario] =
-    useState<UsuarioLogin>(usuarioInicial);
+  const [isLoading, setIsLoading] = useState(false)
 
-  const [isLoading, setIsLoading] =
-    useState(false);
-
-  async function handleLogin(
-    usuarioLogin: UsuarioLogin
-  ) {
-    setIsLoading(true);
-
+  async function handleLogin(usuarioLogin: UsuarioLogin): Promise<boolean> {
     try {
-      await login(
-        "/usuarios/logar",
-        usuarioLogin,
-        setUsuario
-      );
+      setIsLoading(true)
+      
+      // Usa o RETORNO direto da API, não o estado
+      const resposta = await login("/usuarios/logar", usuarioLogin, setUsuario)
+
+      if (resposta.token !== "") {
+        ToastAlerta("Usuário autenticado com sucesso!", "sucesso")
+        return true
+      }
+      return false
     } catch (error) {
-      ToastAlerta(
-        "Usuário ou senha inválidos!",
-        "erro"
-      );
+      console.error("Erro no login:", error)
+      ToastAlerta("Dados do usuário inválidos!", "erro")
+      return false
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
   }
 
-  useEffect(() => {
-    if (usuario.token !== "") {
-      ToastAlerta(
-        "Usuário autenticado com sucesso!",
-        "sucesso"
-      );
-    }
-  }, [usuario.token]);
-
   function handleLogout() {
-    setUsuario(usuarioInicial);
-
-    ToastAlerta(
-      "Usuário deslogado!",
-      "info"
-    );
+    setUsuario({
+      id: 0,
+      nome: "",
+      usuario: "",
+      senha: "",
+      foto: "",
+      token: ""
+    })
   }
 
   return (
-    <AuthContext.Provider
-      value={{
-        usuario,
-        handleLogin,
-        handleLogout,
-        isLoading,
-      }}
-    >
+    <AuthContext.Provider value={{ usuario, handleLogin, handleLogout, isLoading }}>
       {children}
     </AuthContext.Provider>
-  );
+  )
 }
 
-export { AuthContext, AuthProvider };
+export { AuthContext, AuthProvider }

@@ -1,5 +1,5 @@
 import { useState, useContext, useMemo } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/AuthContext"
 import type UsuarioLogin from "../../models/UsuarioLogin"
 import { ClipLoader } from "react-spinners"
@@ -7,6 +7,7 @@ import fotoLogin from "../../assets/img/Rectangle 170.png"
 import logoMaca from "../../assets/img/logocantoparede 1.png"
 
 function Login() {
+  const navigate = useNavigate()
   const { handleLogin, isLoading } = useContext(AuthContext)
 
   const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>({
@@ -41,7 +42,11 @@ function Login() {
 
   async function login(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    await handleLogin(usuarioLogin)
+    const sucesso = await handleLogin(usuarioLogin)
+
+    if (sucesso) {
+      navigate("/home")
+    }
   }
 
   return (
@@ -58,7 +63,6 @@ function Login() {
       }}
     >
 
-      {/* Frutas decorativas — mais sutis e integradas ao gradiente */}
       <svg className="absolute top-10 left-12 w-24 h-24 opacity-[0.07] rotate-12 pointer-events-none hidden lg:block" fill="#F0F0CF" viewBox="0 0 24 24">
         <path d="M17 8C12 8 10 12 10 16C10 17 11 18 12 18C16 18 18 14 18 10C18 9 18 8 17 8Z" />
         <path d="M2 2C8 2 12 6 13 10C12 12 8 14 4 11C3 9 2 5 2 2Z" />
@@ -78,13 +82,11 @@ function Login() {
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 12l3-3m-3 3l-3 3m3-3l3 3m-3-3l-3-3" />
       </svg>
 
-      {/* Card do Login */}
       <div
         className="flex flex-col md:flex-row w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl z-10"
         style={{ backgroundColor: "#F0F0CF" }}
       >
 
-        {/* Lado esquerdo — imagem com overlay */}
         <div className="hidden md:block w-1/2 flex-shrink-0 relative">
           <img
             src={fotoLogin}
@@ -98,7 +100,6 @@ function Login() {
           </div>
         </div>
 
-        {/* Lado direito — formulário */}
         <div className="flex flex-col w-full md:w-1/2 relative p-8 md:p-12 justify-center">
 
           <img
@@ -119,7 +120,6 @@ function Login() {
 
           <form onSubmit={login} className="flex flex-col gap-4">
 
-            {/* E-mail */}
             <div className="flex flex-col gap-1">
               <label
                 htmlFor="usuario"
@@ -141,7 +141,6 @@ function Login() {
               />
             </div>
 
-            {/* Senha com toggle */}
             <div className="flex flex-col gap-1">
               <label
                 htmlFor="senha"
@@ -182,7 +181,6 @@ function Login() {
               </div>
             </div>
 
-            {/* Link cadastro */}
             <div className="flex justify-end">
               <Link
                 to="/cadastro"
@@ -193,7 +191,6 @@ function Login() {
               </Link>
             </div>
 
-            {/* Botão com hover e cursor aprimorados */}
             <div className="flex flex-col items-center gap-4 mt-2">
               <button
                 type="submit"
@@ -202,7 +199,6 @@ function Login() {
                 style={{
                   backgroundColor: "#CA5030",
                   color: "#F0F0CF",
-                  // CSS customizado para hover via estilo inline não funciona, então usamos classe abaixo
                 }}
                 onMouseEnter={(e) => {
                   if (!isLoading) {
@@ -224,7 +220,6 @@ function Login() {
                 )}
               </button>
 
-              {/* Dica do dia */}
               <p
                 className="font-creato text-xs text-center italic mt-1 max-w-[280px] leading-relaxed opacity-80"
                 style={{ color: "#839558" }}
