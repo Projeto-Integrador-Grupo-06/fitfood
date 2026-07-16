@@ -186,7 +186,7 @@ function Home() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div className="text-center lg:text-left">
             <h1 className="font-camera text-6xl md:text-7xl mb-6">fit food</h1>
-            <p className="text-sm md:text-base leading-relaxed mb-8">
+            <p className=" leading-relaxed mb-8 font-creato text-xl text-justify">
               Atualmente, a rotina corrida faz com que muitas pessoas escolham
               alimentos apenas pela praticidade, deixando uma alimentação
               equilibrada em segundo plano. Pensando nisso, o Fit Food foi
@@ -339,7 +339,7 @@ function Home() {
             <h2 className="font-camera text-4xl md:text-5xl mb-4">
               Sobre nos
             </h2>
-            <p className="text-sm md:text-base leading-relaxed max-w-md">
+            <p className="text-xl text-justify leading-relaxed max-w-md">
               Somos uma equipe de desenvolvedores Java Full Stack formada
               durante o bootcamp da Generation Brasil. Unimos nossos
               conhecimentos para criar o Fit Food, um projeto que incentiva

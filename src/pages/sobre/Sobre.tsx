@@ -18,7 +18,7 @@ function Sobre() {
           <h1 className="text-[#0E3322] text-justify text-4xl lg:text-7xl font-camera ">
             Generation
           </h1>
-          <p className="font-creato text-[#0E3322] text-justify w-full max-w-[490px] pl-2">
+          <p className="font-creato text-[#0E3322] text-justify w-full max-w-[490px] pl-2 text-xl">
             Somos uma equipe de desenvolvedores do Bootcamp Java da Generation
             Brasil, reunidos para desenvolver o Fit Food, um projeto que une
             tecnologia e saúde para incentivar hábitos alimentares mais
@@ -30,7 +30,7 @@ function Sobre() {
         </div>
       </div>
 
-      <section className="w-full lg:w-[95%] bg-[#839558]/70 rounded-none lg:rounded-r-[20px] overflow-hidden">
+      <section className="w-full lg:w-[95%] bg-[#839558]/70 rounded-none lg:rounded-r-[20px] overflow-hidden mt-20">
   <div className="flex flex-col lg:flex-row items-center">
 
     {/* Texto */}
@@ -53,7 +53,7 @@ function Sobre() {
     </div>
 
     {/* Imagem */}
-    <div className="w-full lg:w-1/2">
+    <div className="w-full lg:w-1/2 ">
       <img
         src="../src/midia/Logo.png"
         alt="Sobre o Projeto"
@@ -64,11 +64,11 @@ function Sobre() {
   </div>
 </section>
 
-      <div>
+      <div className="mt-20">
         <h2 className="text-[#0E3322] font-camera  text-center p-5 text-4xl md:text-6xl lg:text-7xl">
           Time de Desenvolvedores
         </h2>
-        <p className="w-[60%] mx-auto flex items-center justify-center text-center font-creato text-[#0E3322] font-camera">
+        <p className="w-[60%] mx-auto flex items-center justify-center text-center font-creato text-[#0E3322] font-camera text-xl">
           Nosso time é composto por Product Owner (PO), Scrum Master,
           desenvolvedores e equipe de testes, que atuam de forma colaborativa em
           todas as etapas do projeto. Em conjunto, realizamos a prototipação, o
@@ -133,7 +133,7 @@ function Sobre() {
                   Isabella Rodrigues
                 </h2>
 
-                <p className="text-[#173E2A] font-creato">
+                <p className="text-[#173E2A] text-2xl font-creato">
                   Full Stack Java • UI/UX Designer
                 </p>
 
@@ -209,7 +209,7 @@ function Sobre() {
                   Giovanna Mendes
                 </h2>
 
-                <p className="text-[#173E2A] font-creato">Full Stack Java •</p>
+                <p className="text-[#173E2A] text-2xl font-creato">Full Stack Java •</p>
 
                 <div className="font-creato text-lg text-[#173E2A] space-y-2">
                   <a
@@ -284,7 +284,7 @@ function Sobre() {
                   Bianca Casagrande
                 </h2>
 
-                <p className="text-[#173E2A] font-creato">Full Stack Java •</p>
+                <p className="text-[#173E2A] text-2xl font-creato">Full Stack Java •</p>
 
                 <div className="font-creato text-lg text-[#173E2A] space-y-2">
                   <a
@@ -359,7 +359,7 @@ function Sobre() {
                   Jhonatan Oliveira
                 </h2>
 
-                <p className="text-[#173E2A] font-creato">Full Stack Java •</p>
+                <p className="text-[#173E2A] text-2xl font-creato">Full Stack Java •</p>
 
                 <div className="font-creato text-lg text-[#173E2A] space-y-2">
                   <a
@@ -434,7 +434,7 @@ function Sobre() {
                   Dayane Santana
                 </h2>
 
-                <p className="text-[#173E2A] font-creato">Full Stack Java •</p>
+                <p className="text-[#173E2A] text-2xl font-creato">Full Stack Java •</p>
 
                 <div className="font-creato text-lg text-[#173E2A] space-y-2">
                   <a
@@ -508,7 +508,7 @@ function Sobre() {
                   Jackeline Pessoa
                 </h2>
 
-                <p className="text-[#173E2A] font-creato">Full Stack Java •</p>
+                <p className="text-[#173E2A] text-2xl font-creato">Full Stack Java •</p>
 
                 <div className="font-creato text-lg text-[#173E2A] space-y-2">
                   <a
@@ -583,7 +583,7 @@ function Sobre() {
                   Rafael Scherer
                 </h2>
 
-                <p className="text-[#173E2A] font-creato">Full Stack Java •</p>
+                <p className="text-[#173E2A] text-2xl font-creato">Full Stack Java •</p>
 
                 <div className="font-creato text-lg text-[#173E2A] space-y-2">
                   <a
