@@ -179,7 +179,7 @@ function Cadastro() {
 
           <div className="grid grid-cols-3 w-full gap-2">
             <div className="flex flex-col w-full">
-              <label htmlFor="altura">Altura</label>
+              <label htmlFor="altura">Altura em cm</label>
               <input
                 type="type"
                 name="altura"
@@ -346,7 +346,7 @@ function Cadastro() {
               className="rounded-3xl cursor-pointer text-white bg-[#ca5030] hover:bg-[#f7613b] w-1/2 py-2 flex justify-center"
             >
               {isLoading ? (
-                <MoonLoader color="ffffff" size={24} />
+                <MoonLoader color="#ffffff" size={24} />
               ) : (
                 <span>Cadastrar</span>
               )}
@@ -354,11 +354,11 @@ function Cadastro() {
           </div>
         </form>
       </div>
-      <div className="absolute right-0 top-28 z-50 pointer-events-none">
+      <div className="absolute right-0 top-4 z-50 pointer-events-none">
         <img
           src="https://i.imgur.com/hogHPOm.png"
           alt="Mascote FitFood"
-          className="h-40  w-auto translate-x-[2px]"
+          className="h-30  w-auto translate-x-[2px]"
         />
       </div>
     </>

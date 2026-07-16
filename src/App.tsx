@@ -11,11 +11,11 @@ import Sobre from "./pages/sobre/Sobre";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Slides from './pages/slides/Slides'
-import Footer from "./components/footer/Footer";
+
 
 function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation()
-  const esconderLayout = ["/", "/cadastro"].includes(location.pathname)
+  const esconderLayout = ["/login", "/cadastro"].includes(location.pathname)
 
   if (esconderLayout) {
     return <main className="flex-1">{children}</main>
@@ -40,7 +40,8 @@ function App() {
       <div className="min-h-screen flex flex-col bg-[#F0F0CF]">
         <Layout>
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/home" element={<Home />} />
             <Route path="/perfil" element={<Perfil />} />
