@@ -39,12 +39,13 @@ const usuarioInicial: UsuarioLogin = {
 
 
 const dadosFisicosInicial: DadosFisicos = {
-
     idade: 0,
     sexo: "feminino",
     atividade: "sedentario",
-    objetivo: "manutencao"
-
+    objetivo: "manutencao",
+    imc: 0,
+    tmb: 0,
+    caloriasDiarias: 0
 };
 
 
@@ -106,12 +107,15 @@ function AuthProvider({ children }: { children: ReactNode }) {
 
             if (resposta.token) {
 
+                localStorage.setItem(
+                    "token",
+                    resposta.token
+                );
 
                 ToastAlerta(
                     "Usuário autenticado com sucesso!",
                     "sucesso"
                 );
-
 
                 return true;
 
@@ -153,15 +157,13 @@ function AuthProvider({ children }: { children: ReactNode }) {
 
 
 
-
     function handleLogout() {
 
+        localStorage.removeItem("token");
 
         setUsuario(usuarioInicial);
 
-
         setDadosFisicos(dadosFisicosInicial);
-
 
     }
 

@@ -22,6 +22,23 @@ function ResumoDiario({
   carboidratos,
   gorduras,
 }: ResumoDiarioProps) {
+
+  const diferenca = metaDiaria - caloriasConsumidas;
+
+  let mensagem = "";
+  let corMensagem = "";
+
+  if (diferenca > 0) {
+    mensagem = `Faltam ${diferenca.toFixed(0)} kcal para atingir sua meta diária.`;
+    corMensagem = "#2E7D32";
+  } else if (diferenca < 0) {
+    mensagem = `Você ultrapassou sua meta em ${Math.abs(diferenca).toFixed(0)} kcal.`;
+    corMensagem = "#C62828";
+  } else {
+    mensagem = "Parabéns! Você atingiu exatamente sua meta diária.";
+    corMensagem = "#1565C0";
+  }
+
   return (
     <section
       className="mt-8 rounded-3xl p-6 shadow-lg"
@@ -58,6 +75,13 @@ function ResumoDiario({
         />
       </div>
 
+      <p
+        className="mt-4 text-center font-semibold"
+        style={{ color: corMensagem }}
+      >
+        {mensagem}
+      </p>
+
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
         <div className="flex items-center gap-3 rounded-2xl bg-[#F7F7F2] p-4">
           <Barbell size={28} color={COLORS.primary} />
@@ -90,4 +114,4 @@ function ResumoDiario({
   );
 }
 
-export default ResumoDiario;
+export default ResumoDiario; 

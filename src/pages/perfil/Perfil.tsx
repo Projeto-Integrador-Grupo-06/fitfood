@@ -175,9 +175,20 @@ export default function Perfil() {
             calorias: Math.round(kcal),
         });
 
+        setDadosFisicos({
+            ...dadosFisicos,
+            imc,
+            tmb: Math.round(tmb),
+            caloriasDiarias: Math.round(kcal),
+        });
+
+        setAbrirModal(false);
+
 
         setAbrirModal(false);
     }
+
+
 
 
 
