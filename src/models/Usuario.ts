@@ -8,8 +8,8 @@ export default interface Usuario {
     senha: string;
     foto: string;
 
-    peso: number | null;
-    altura: number | null;
+    peso: number | undefined;
+    altura: number | undefined;
     imc: string | null;
 
     alimentos: Alimentos[] | null;

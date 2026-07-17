@@ -50,12 +50,7 @@ function Cadastro() {
           foto: usuario.foto,
         };
 
-
-        await cadastrarUsuario(
-          `/usuarios/cadastrar`,
-          novoUsuario,
-          setUsuario
-        );
+        await cadastrarUsuario(`/usuarios/cadastrar`, novoUsuario, setUsuario);
         ToastAlerta("Usuário cadastrado com sucesso!", "sucesso");
       } catch (error) {
         ToastAlerta("Erro ao cadastrar usuário!", "erro");
@@ -83,7 +78,6 @@ function Cadastro() {
       justify-center
       "
       >
-
         <div
           className="
         grid
@@ -97,9 +91,6 @@ function Cadastro() {
         shadow-xl
         "
         >
-
-
-          {/* Imagem lateral */}
           <div
             className="
           hidden
@@ -108,14 +99,10 @@ function Cadastro() {
           bg-center
           "
             style={{
-              backgroundImage:
-                "url('https://i.imgur.com/KqZSJ6n.png')",
+              backgroundImage: "url('https://i.imgur.com/KqZSJ6n.png')",
             }}
           />
 
-
-
-          {/* Card branco */}
           <div
             className="
           bg-white
@@ -123,23 +110,19 @@ function Cadastro() {
           flex
           items-center
           justify-center
+          h-[90vh]
           "
           >
-
-
-            {/* Mascote */}
             <img
               src={mascote}
               alt="Mascote FitFood"
               className="
               absolute
-              top-3
+              top-15
               right-0
               h-28
               w-auto"
             />
-
-
 
             <form
               className="
@@ -152,10 +135,7 @@ function Cadastro() {
             "
               onSubmit={cadastrarNovoUsuario}
             >
-
-
               <div className="text-left">
-
                 <h1
                   className="
     font-camera
@@ -163,25 +143,22 @@ function Cadastro() {
     text-4xl
     lg:text-5xl
     leading-tight
+    mt-7
     "
                 >
                   Venha fazer parte do FitFood
                 </h1>
 
-
                 <p
                   className="
     text-[#0e3322]
     mt-3
-    font-creato
+    font-creato text-xl
     "
                 >
                   Crie sua conta e comece hoje uma jornada mais saudável
                 </p>
-
               </div>
-
-
 
               <input
                 type="text"
@@ -201,8 +178,6 @@ function Cadastro() {
                 onChange={atualizarEstado}
               />
 
-
-
               <input
                 type="email"
                 name="usuario"
@@ -220,8 +195,6 @@ function Cadastro() {
               "
                 onChange={atualizarEstado}
               />
-
-
 
               <input
                 type="text"
@@ -241,10 +214,7 @@ function Cadastro() {
                 onChange={atualizarEstado}
               />
 
-
-
               <div className="grid grid-cols-2 gap-4">
-
                 <input
                   type="password"
                   name="senha"
@@ -259,7 +229,6 @@ function Cadastro() {
                 "
                   onChange={atualizarEstado}
                 />
-
 
                 <input
                   type="password"
@@ -276,10 +245,7 @@ function Cadastro() {
                 "
                   onChange={handleConfirmarSenha}
                 />
-
               </div>
-
-
 
               <button
                 type="submit"
@@ -291,18 +257,15 @@ function Cadastro() {
               text-white
               font-bold
               transition
+              cursor-pointer
               "
               >
-
                 {isLoading ? (
                   <MoonLoader color="#ffffff" size={24} />
                 ) : (
                   "Cadastrar"
                 )}
-
               </button>
-
-
 
               <button
                 type="button"
@@ -310,21 +273,15 @@ function Cadastro() {
                 className="
               text-[#839558]
               hover:text-[#ca5030]
+              cursor-pointer
+              mb-8
               "
               >
                 Já tenho uma conta
               </button>
-
-
             </form>
-
-
           </div>
-
-
         </div>
-
-
       </div>
     </>
   );
