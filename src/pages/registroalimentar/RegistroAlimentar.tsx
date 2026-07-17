@@ -456,7 +456,7 @@ async function handleSalvarAlimento(alimento: any, categoriaId: number) {
         )
       );
 
-      await atualizarAlimentacao(alimentoEmEdicao.id, dadosAlimento);
+      await atualizarAlimentacao(alimentoEmEdicao.id!, dadosAlimento);
 
 
       const itemAtualizado: ItemRefeicao = {
@@ -610,9 +610,6 @@ async function handleSalvarAlimento(alimento: any, categoriaId: number) {
       <ResumoDiario
         caloriasConsumidas={totalCalorias}
         metaDiaria={dadosFisicos.caloriasDiarias}
-        proteinas={totalProteinas}
-        carboidratos={totalCarboidratos}
-        gorduras={totalGorduras}
       />
 
       <ListaCategorias />

@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
 import { Pagination, Autoplay } from "swiper/modules";
 
 import "swiper/css";
@@ -36,7 +37,7 @@ const equipe = [
     imagem: "../src/midia/JhonatanOliveira.jpg",
     github: "https://github.com/JhonatanOliveira18",
     linkedin: "https://www.linkedin.com/in/devjhonatanoliveira/",
-    extra: { label: "Portfólio", url: "https://www.instagram.com/biancaccasagrande/" },
+    extra: { label: "Portfólio", url: "https://github.com/JhonatanOliveira18" },
   },
   {
     nome: "Dayane Santana",
@@ -66,7 +67,7 @@ const equipe = [
 ];
 
 function Sobre() {
-  const swiperRef = useRef(null);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   return (
     <div>
@@ -183,7 +184,9 @@ function Sobre() {
 
           <Swiper
             modules={[Pagination, Autoplay]}
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
+            onSwiper={(swiper: SwiperType) => {
+              swiperRef.current = swiper;
+            }}
             pagination={{ clickable: true }}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             loop
