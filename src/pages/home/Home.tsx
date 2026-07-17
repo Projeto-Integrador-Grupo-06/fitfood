@@ -6,7 +6,7 @@ import frangoarroz from "../../assets/img/frango-arroz.png";
 import omeletelegumes from "../../assets/img/omelete-legumes.png";
 import peixelegumes from "../../assets/img/peixe-legume.png";
 import saladafrango from "../../assets/img/salada-frango.png";
-import tilapiaabobrinha from "../../assets/img/tilapia-abobrinha.png";
+import frangoComOvosELegumes from "../../assets/img/frangoComOvosELegumes.png";
 import acompanheprogresso from "../../assets/img/acompanhe-progresso.png";
 import adicionealimentos from "../../assets/img/adicione-alimentos.png";
 import organizerotina from "../../assets/img/organize-rotina.png";
@@ -18,6 +18,7 @@ interface Receita {
   imagem: string;
   ingredientes: string[];
   modoPreparo: string;
+  imagemPequena?: boolean; // true = imagem exibida menor/contida
 }
 
 type CategoriaChave = "manutencao" | "superavit" | "deficit";
@@ -71,6 +72,7 @@ const categorias: Categoria[] = [
         nome: "Carne com Pure",
         kcal: 450,
         imagem: carnebatata,
+        imagemPequena: true,
         ingredientes: [
           "120 g de carne magra",
           "150 g de pure de batata",
@@ -136,17 +138,19 @@ const categorias: Categoria[] = [
         nome: "Omelete com Legumes",
         kcal: 180,
         imagem: omeletelegumes,
+        imagemPequena: true,
         ingredientes: ["2 ovos", "50 g de espinafre", "50 g de tomate"],
         modoPreparo:
           "Bata os ovos, misture os legumes e sirva.",
       },
       {
         id: 3,
-        nome: "Tilapia com Abobrinha",
-        kcal: 170,
-        imagem: tilapiaabobrinha,
-        ingredientes: ["120 g de filé de tilapia", "100 g de abobrinha"],
-        modoPreparo: "Grelhe a tilapia, refogue a abobrinha e sirva.",
+        nome: "Frango com Ovo e Legumes",
+        imagemPequena: true,
+        kcal: 330,
+        imagem: frangoComOvosELegumes,
+        ingredientes: ["100 g de frango", "1 ovo cozido", "80 g de brócolis", "50 g de cenoura"],
+        modoPreparo: " Cozinhe o ovo e os legumes. Grelhe o frango e sirva tudo junto.",
       },
     ],
   },
@@ -182,7 +186,7 @@ function Home() {
 
       {/* Introdução */}
       <section className="bg-[#F0F0CF] px-4 py-16">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12 items-center">
           <div className="text-center lg:text-left">
             <h1 className="font-camera text-6xl md:text-7xl mb-6">fit food</h1>
             <p className=" leading-relaxed mb-8 font-creato text-xl text-justify">
@@ -199,19 +203,21 @@ function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-5">
             {destaques.map((item) => (
               <div key={item.titulo} className="flex flex-col">
                 <img
                   src={item.imagem}
                   alt={item.titulo}
-                  className="w-full h-32 md:h-40 object-cover rounded-t-xl"
+                  className="w-full h-36 md:h-44 object-cover rounded-t-xl"
                 />
-                <div className="bg-[#839558] text-center rounded-b-xl p-3 flex-1">
-                  <p className="font-camera text-white text-xs md:text-sm mb-1">
+
+                <div className="bg-[#839558] text-center rounded-b-xl p-4 flex-1">
+                  <p className="font-camera text-white text-base md:text-lg tracking-wide mb-2">
                     {item.titulo}
                   </p>
-                  <p className="font-creato text-[#0E3322] text-[10px] md:text-xs">
+
+                  <p className="font-creato text-[#0E3322] text-xs md:text-sm leading-relaxed">
                     {item.descricao}
                   </p>
                 </div>
@@ -268,51 +274,61 @@ function Home() {
 
       {/* Receitas */}
       <section className="bg-[#F0F0CF] px-4 pb-16">
-        <h2 className="font-camera text-4xl pt-16 md:text-5xl text-center mb-20">
+        <h2 className="font-camera text-[#0E3322] text-4xl pt-16 md:text-5xl text-center mb-4">
           Receitas
         </h2>
+        <p className="font-creato text-[#0E3322] text-center text-lg mb-20">
+          Receitas que te ajudam a manter sua meta de calorias diárias
+        </p>
 
-        <div className="max-w-5xl mx-auto flex items-center gap-3 md:gap-6">
+        <div className="max-w-7xl mx-auto flex items-center gap-4 md:gap-8">
           <button
             type="button"
             onClick={receitaAnterior}
             aria-label="Receita anterior"
-            className="shrink-0 text-[#0E3322] hover:text-[#CA5030] transition text-3xl md:text-4xl"
+            className="shrink-0 text-[#CA5030] hover:text-[#0E3322] transition text-4xl md:text-5xl"
           >
             ◀
           </button>
 
-          <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
             {[receita1, receita2].map((receita) => (
               <div
                 key={receita.id}
-                className="rounded-2xl overflow-hidden shadow-lg bg-[#839558] flex flex-col sm:flex-row sm:h-80"
+                className="relative rounded-[32px] overflow-hidden bg-[#839558] shadow-lg h-full min-h-[380px] sm:min-h-[420px]"
               >
-                <div className="relative sm:w-2/5 shrink-0 h-48 sm:h-full">
+                {/* Imagem: ocupa a lateral esquerda inteira e "sangra" para fora do card */}
+                <div className="relative w-full h-56 sm:absolute sm:inset-y-0 sm:left-0 sm:h-full sm:w-[42%] sm:-ml-8 lg:-ml-10 shrink-0">
                   <img
                     src={receita.imagem}
                     alt={receita.nome}
-                    className="w-full h-full object-cover"
+                    className={
+                      receita.imagemPequena
+                        ? "w-full h-full object-contain p-1 sm:p-1.5"
+                        : "w-full h-full object-cover"
+                    }
                   />
-                  <span className="absolute top-3 left-3 bg-white/90 text-[#0E3322] px-3 py-1 rounded-full text-xs font-creato-medium">
+
+                  <span className="absolute top-4 left-10 sm:top-6 sm:left-14 whitespace-nowrap bg-[#0E3322] text-white text-sm font-creato-medium px-4 py-2 rounded-full shadow">
                     Total: ≈ {receita.kcal} kcal
                   </span>
                 </div>
 
-                <div className="text-white p-6 flex-1 overflow-y-auto">
-                  <h3 className="font-camera text-2xl mb-3">{receita.nome}</h3>
+                {/* Conteúdo */}
+                <div className="relative text-[#0E3322] h-full sm:ml-[38%] flex flex-col justify-center px-6 sm:px-8 py-8">
+                  <h3 className="font-camera text-3xl sm:text-4xl leading-tight mb-4">
+                    {receita.nome}
+                  </h3>
 
-                  <p className="font-creato-medium mb-2">Ingredientes</p>
-
-                  <ul className="list-disc list-inside text-sm space-y-1 mb-4">
+                  <p className="font-creato-medium text-base mb-1">Ingredientes:</p>
+                  <ul className="list-disc list-inside text-base space-y-1 mb-5">
                     {receita.ingredientes.map((ingrediente, index) => (
                       <li key={index}>{ingrediente}</li>
                     ))}
                   </ul>
 
-                  <p className="font-creato-medium mb-2">Modo de preparo</p>
-
-                  <p className="text-sm">{receita.modoPreparo}</p>
+                  <p className="font-creato-medium text-base mb-1">Modo de preparo:</p>
+                  <p className="text-base">{receita.modoPreparo}</p>
                 </div>
               </div>
             ))}
@@ -322,7 +338,7 @@ function Home() {
             type="button"
             onClick={proximaReceita}
             aria-label="Próxima receita"
-            className="shrink-0 text-[#0E3322] hover:text-[#CA5030] transition text-3xl md:text-4xl"
+            className="shrink-0 text-[#CA5030] hover:text-[#0E3322] transition text-4xl md:text-5xl"
           >
             ▶
           </button>
@@ -336,11 +352,10 @@ function Home() {
                 key={index}
                 onClick={() => setReceitaIndex(index * 2)}
                 aria-label={`Ver receita ${index + 1}`}
-                className={`w-3.5 h-3.5 rounded-full transition ${
-                  index === Math.floor(receitaIndex / 2)
+                className={`w-3.5 h-3.5 rounded-full transition ${index === Math.floor(receitaIndex / 2)
                     ? "bg-[#0E3322]"
                     : "bg-[#839558]/60"
-                }`}
+                  }`}
               />
             )
           )}
