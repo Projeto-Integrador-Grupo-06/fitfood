@@ -2,7 +2,7 @@ import axios from "axios";
 import type UsuarioLogin from "../models/UsuarioLogin";
 
 export const api = axios.create({
-  baseURL: "https://sistema-fit.onrender.com/"
+  baseURL: import.meta.env.VITE_API_URL
 });
 
 export const cadastrarUsuario = async (
