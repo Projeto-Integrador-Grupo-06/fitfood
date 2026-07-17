@@ -7,7 +7,7 @@ function Navbar() {
   const menu = [
     {
       nome: "HOME",
-      rota: "/",
+      rota: "/home",
     },
     {
       nome: "REGISTRO ALIMENTAR",
@@ -26,7 +26,7 @@ function Navbar() {
           : "relative bg-[#0E3322]"
         }`}
     >
-      <Link to="/">
+      <Link to="/home">
         <img
           src={logo}
           alt="Fit Food"

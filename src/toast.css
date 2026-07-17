@@ -1,0 +1,35 @@
+    /* Toast */
+
+.Toastify__toast {
+  border-radius: 12px;
+  color: #F0F0CF;
+  font-weight: 500;
+}
+
+/* Sucesso */
+.Toastify__toast--success {
+  background: #0E3322;
+  border: 2px solid #F0F0CF;
+}
+
+/* Erro */
+.Toastify__toast--error {
+  background: #CA5030;
+  border: 2px solid #F0F0CF;
+}
+
+/* Informação */
+.Toastify__toast--info {
+  background: #839558;
+  border: 2px solid #F0F0CF;
+}
+
+/* Barra de progresso */
+.Toastify__progress-bar {
+  background: #F0F0CF;
+}
+
+/* Botão de fechar */
+.Toastify__close-button {
+  color: #F0F0CF;
+}

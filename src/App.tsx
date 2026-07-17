@@ -11,7 +11,8 @@ import Sobre from "./pages/sobre/Sobre";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Slides from './pages/slides/Slides'
-import Footer from "./components/footer/Footer";
+
+
 
 function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation()
