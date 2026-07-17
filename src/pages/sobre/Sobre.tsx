@@ -1,11 +1,73 @@
+import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+const equipe = [
+  {
+    nome: "Isabella Rodrigues",
+    funcao: "Full Stack Java • UI/UX Designer",
+    imagem: "../src/midia/IsabelaRodrigues.jpg",
+    github: "https://github.com/isa01rodrigues",
+    linkedin: "https://www.linkedin.com/in/isabelladasilvarodriguesdev/",
+    extra: { label: "Portfólio", url: "https://www.instagram.com/bella_stech" },
+  },
+  {
+    nome: "Giovanna Mendes",
+    funcao: "Full Stack Java",
+    imagem: "../src/midia/GiovannaMendes.jpg",
+    github: "https://github.com/GiMendescCodes",
+    linkedin: "https://www.linkedin.com/in/giovannasilvamendes/",
+    extra: { label: "Portfólio", url: "https://gimendesccodes.github.io/portfolioGen/" },
+  },
+  {
+    nome: "Bianca Casagrande",
+    funcao: "Full Stack Java",
+    imagem: "../src/midia/BiancaCasagrande.jpg",
+    github: "https://github.com/bccasagrande",
+    linkedin: "https://www.linkedin.com/in/biancacarvalhocasagrande/",
+    extra: { label: "Portfólio", url: "https://www.instagram.com/biancaccasagrande/" },
+  },
+  {
+    nome: "Jhonatan Oliveira",
+    funcao: "Full Stack Java",
+    imagem: "../src/midia/JhonatanOliveira.jpg",
+    github: "https://github.com/JhonatanOliveira18",
+    linkedin: "https://www.linkedin.com/in/devjhonatanoliveira/",
+    extra: { label: "Portfólio", url: "https://www.instagram.com/biancaccasagrande/" },
+  },
+  {
+    nome: "Dayane Santana",
+    funcao: "Full Stack Java",
+    imagem: "../src/midia/DayaneSantana.jpg",
+    github: "https://github.com/dayanesantana",
+    linkedin: "http://linkedin.com/in/dayanesantana59",
+    extra: { label: "Portfólio", url: "https://dayanesantana.github.io/meu-portfolio/" },
+  },
+  {
+    nome: "Jackeline Pessoa",
+    funcao: "Full Stack Java",
+    imagem: "../src/midia/JackelinePessoa.jpg",
+    github: "https://github.com/jackeline5458",
+    linkedin:
+      "https://www.linkedin.com/in/jackelinepessoa?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
+    extra: { label: "Portfólio", url: "#" },
+  },
+  {
+    nome: "Rafael Scherer",
+    funcao: "Full Stack Java",
+    imagem: "../src/midia/RafaelScherer.jpg",
+    github: "https://github.com/rafaelscherer3",
+    linkedin: "https://www.linkedin.com/in/rafaelscherer3/",
+    extra: { label: "Portfólio", url: "#" },
+  },
+];
+
 function Sobre() {
+  const swiperRef = useRef(null);
+
   return (
     <div>
       <div className="flex flex-col lg:flex-row items-center justify-center gap-8 px-5">
@@ -31,38 +93,36 @@ function Sobre() {
       </div>
 
       <section className="w-full lg:w-[95%] bg-[#839558]/70 rounded-none lg:rounded-r-[20px] overflow-hidden mt-20">
-  <div className="flex flex-col lg:flex-row items-center">
+        <div className="flex flex-col lg:flex-row items-center">
+          {/* Texto */}
+          <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 py-8 sm:px-8 md:px-12 lg:px-14 lg:py-12">
+            <h2 className="text-[#0E3322] font-camera text-center lg:text-left text-4xl sm:text-5xl lg:text-6xl mb-6">
+              Sobre o Projeto
+            </h2>
 
-    {/* Texto */}
-    <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 py-8 sm:px-8 md:px-12 lg:px-14 lg:py-12">
-      <h2 className="text-[#0E3322] font-camera text-center lg:text-left text-4xl sm:text-5xl lg:text-6xl mb-6">
-        Sobre o Projeto
-      </h2>
+            <p className="font-creato text-[#0E3322] text-justify text-sm sm:text-base lg:text-lg leading-7">
+              O Fit Food é uma plataforma desenvolvida para ajudar pessoas a
+              organizarem e acompanharem sua alimentação de forma simples e
+              eficiente. O sistema permite registrar as refeições diárias com
+              cálculo automático de calorias, acessar receitas saudáveis,
+              calcular o Índice de Massa Corporal (IMC) e acompanhar toda a
+              evolução alimentar. Com uma interface moderna e intuitiva, o Fit
+              Food oferece as ferramentas necessárias para que cada usuário
+              monitore seus hábitos, acompanhe seu progresso e tenha mais
+              controle sobre sua jornada rumo a uma vida mais saudável.
+            </p>
+          </div>
 
-      <p className="font-creato text-[#0E3322] text-justify text-sm sm:text-base lg:text-lg leading-7">
-        O Fit Food é uma plataforma desenvolvida para ajudar pessoas a
-        organizarem e acompanharem sua alimentação de forma simples e
-        eficiente. O sistema permite registrar as refeições diárias com
-        cálculo automático de calorias, acessar receitas saudáveis,
-        calcular o Índice de Massa Corporal (IMC) e acompanhar toda a
-        evolução alimentar. Com uma interface moderna e intuitiva, o Fit
-        Food oferece as ferramentas necessárias para que cada usuário
-        monitore seus hábitos, acompanhe seu progresso e tenha mais
-        controle sobre sua jornada rumo a uma vida mais saudável.
-      </p>
-    </div>
-
-    {/* Imagem */}
-    <div className="w-full lg:w-1/2 ">
-      <img
-        src="../src/midia/Logo.png"
-        alt="Sobre o Projeto"
-        className="w-full h-[350px] sm:h-[350px] lg:h-full object-cover"
-      />
-    </div>
-
-  </div>
-</section>
+          {/* Imagem */}
+          <div className="w-full lg:w-1/2 ">
+            <img
+              src="../src/midia/Logo.png"
+              alt="Sobre o Projeto"
+              className="w-full h-[350px] sm:h-[350px] lg:h-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
 
       <div className="mt-20">
         <h2 className="text-[#0E3322] font-camera  text-center p-5 text-4xl md:text-6xl lg:text-7xl">
@@ -78,545 +138,120 @@ function Sobre() {
         </p>
       </div>
 
-      <div className="flex items-center justify-center bg-[#F6F3D7] py-10">
-        <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
-          navigation
-          pagination={{ clickable: true }}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          loop={true}
-          spaceBetween={30}
-          slidesPerView={1}
-          className="w-[1200px] h-[450px] equipe-swiper"
-        >
-          {/*Isabella*/}
-          <SwiperSlide>
-            <div
-              className="  w-full
-                min-h-[450px]
-                bg-[#BFC693]
-                rounded-[20px]
-                flex
-                flex-col
-                lg:flex-row
-                items-center
-                justify-center
-                px-6
-                md:px-10
-                lg:px-16
-                py-8
-                gap-8
-                lg:gap-20"
-            >
-              <div className="shadow-lg rounded-md flex-shrink-0">
-                <img
-                  className="w-52
-                      h-52
-                      sm:w-60
-                      sm:h-60
-                      md:w-72
-                      md:h-72
-                      lg:w-[350px]
-                      lg:h-[350px]
-                      rounded-[10px]
-                      object-cover"
-                  src="../src/midia/IsabelaRodrigues.jpg"
-                  alt="Isabella Rodrigues"
-                />
-              </div>
+      <div className="relative flex items-center justify-center bg-[#F6F3D7] py-16 px-4">
+        {/* estilo da paginação sobrescrito com a paleta do projeto */}
+        <style>{`
+          .equipe-swiper .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background: #839558;
+            opacity: 0.5;
+          }
+          .equipe-swiper .swiper-pagination-bullet-active {
+            background: #CA5030;
+            opacity: 1;
+            width: 28px;
+            border-radius: 6px;
+            transition: width 0.3s ease;
+          }
+        `}</style>
 
-              <div className="flex flex-col justify-center flex-1">
-                <h2 className="font-camera text-5xl text-[#FFF8E8] mb-1.5">
-                  Isabella Rodrigues
-                </h2>
+        <div className="relative w-full max-w-[1200px]">
+          {/* Seta anterior */}
+          <button
+            type="button"
+            aria-label="Membro anterior"
+            onClick={() => swiperRef.current?.slidePrev()}
+            className="hidden md:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 rounded-full bg-[#FFF8E8] text-[#0E3322] shadow-[0_4px_14px_rgba(14,51,34,0.25)] hover:bg-[#0E3322] hover:text-[#FFF8E8] transition-colors duration-300"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
 
-                <p className="text-[#173E2A] text-2xl font-creato">
-                  Full Stack Java • UI/UX Designer
-                </p>
+          {/* Seta próxima */}
+          <button
+            type="button"
+            aria-label="Próximo membro"
+            onClick={() => swiperRef.current?.slideNext()}
+            className="hidden md:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 rounded-full bg-[#FFF8E8] text-[#0E3322] shadow-[0_4px_14px_rgba(14,51,34,0.25)] hover:bg-[#0E3322] hover:text-[#FFF8E8] transition-colors duration-300"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
 
-                <div className="font-creato text-lg text-[#173E2A] space-y-2">
-                  <a
-                    href="https://github.com/isa01rodrigues"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    GitHub |
-                  </a>
+          <Swiper
+            modules={[Pagination, Autoplay]}
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            loop
+            spaceBetween={30}
+            slidesPerView={1}
+            className="equipe-swiper w-full h-[440px]"
+          >
+            {equipe.map((pessoa) => (
+              <SwiperSlide key={pessoa.nome}>
+                <div className="w-full min-h-[420px] rounded-[24px] bg-[#BFC693] shadow-[0_18px_40px_-12px_rgba(14,51,34,0.35)] flex flex-col items-center justify-center gap-4 px-8 py-10 text-center">
+                  <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full border-[6px] border-[#0E3322] overflow-hidden shadow-md">
+                    <img
+                      src={pessoa.imagem}
+                      alt={pessoa.nome}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
 
-                  <a
-                    href="https://www.linkedin.com/in/isabelladasilvarodriguesdev/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    LinkedIn |
-                  </a>
+                  <span className="inline-block w-fit font-creato text-xs tracking-wide uppercase bg-[#0E3322] text-[#FFF8E8] px-3 py-1 rounded-full">
+                    {pessoa.funcao}
+                  </span>
 
-                  <a
-                    href="https://www.instagram.com/bella_stech"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    Portfólio
-                  </a>
+                  <h2 className="font-camera text-3xl sm:text-4xl text-[#0E3322] leading-tight">
+                    {pessoa.nome}
+                  </h2>
+
+                  <div className="h-[3px] w-16 bg-[#CA5030] rounded-full" />
+
+                  <div className="flex flex-wrap justify-center gap-3">
+                    <a
+                      href={pessoa.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 font-creato text-sm text-[#173E2A] bg-[#F6F3D7] hover:bg-[#0E3322] hover:text-[#FFF8E8] transition-colors duration-300 px-4 py-2 rounded-full"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.37 0 0 5.5 0 12.3c0 5.42 3.44 10.02 8.2 11.65.6.11.82-.27.82-.6 0-.29-.01-1.06-.02-2.08-3.34.75-4.04-1.66-4.04-1.66-.55-1.42-1.34-1.8-1.34-1.8-1.1-.77.08-.76.08-.76 1.21.09 1.85 1.28 1.85 1.28 1.08 1.9 2.83 1.35 3.52 1.03.11-.8.42-1.35.77-1.66-2.67-.31-5.47-1.37-5.47-6.08 0-1.34.46-2.44 1.22-3.3-.12-.31-.53-1.56.12-3.25 0 0 1-.33 3.3 1.26a11.2 11.2 0 0 1 6 0c2.28-1.59 3.29-1.26 3.29-1.26.65 1.69.24 2.94.12 3.25.76.86 1.22 1.96 1.22 3.3 0 4.72-2.8 5.76-5.48 6.07.43.38.81 1.14.81 2.3 0 1.66-.02 3-.02 3.4 0 .33.22.72.83.6A12.32 12.32 0 0 0 24 12.3C24 5.5 18.63 0 12 0Z" />
+                      </svg>
+                      GitHub
+                    </a>
+                    <a
+                      href={pessoa.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 font-creato text-sm text-[#173E2A] bg-[#F6F3D7] hover:bg-[#0E3322] hover:text-[#FFF8E8] transition-colors duration-300 px-4 py-2 rounded-full"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.11 20.45H3.56V9h3.55v11.45Z" />
+                      </svg>
+                      LinkedIn
+                    </a>
+                    <a
+                      href={pessoa.extra.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 font-creato text-sm text-[#173E2A] bg-[#F6F3D7] hover:bg-[#CA5030] hover:text-[#FFF8E8] transition-colors duration-300 px-4 py-2 rounded-full"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 0 1 6.32 12.9l-9.22-9.22A7.96 7.96 0 0 1 12 4Zm0 16a8 8 0 0 1-6.32-12.9l9.22 9.22A7.96 7.96 0 0 1 12 20Z" />
+                      </svg>
+                      {pessoa.extra.label}
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </SwiperSlide>
-          {/*Giovanna Mendes*/}
-          <SwiperSlide>
-            <div
-              className="  w-full
-                  min-h-[450px]
-                  bg-[#BFC693]
-                  rounded-[20px]
-                  flex
-                  flex-col
-                  lg:flex-row
-                  items-center
-                  justify-center
-                  px-6
-                  md:px-10
-                  lg:px-16
-                  py-8
-                  gap-8
-                  lg:gap-20"
-            >
-              <div className="shadow-lg rounded-md flex-shrink-0">
-                <img
-                  className="w-52
-                    h-52
-                    sm:w-60
-                    sm:h-60
-                    md:w-72
-                    md:h-72
-                    lg:w-[350px]
-                    lg:h-[350px]
-                    rounded-[10px]
-                    object-cover"
-                  src="../src/midia/GiovannaMendes.jpg"
-                  alt="Giovanna Mendes"
-                />
-              </div>
-
-              <div className="flex flex-col justify-center flex-1">
-                <h2 className="font-camera text-5xl text-[#FFF8E8] mb-1.5">
-                  Giovanna Mendes
-                </h2>
-
-                <p className="text-[#173E2A] text-2xl font-creato">Full Stack Java •</p>
-
-                <div className="font-creato text-lg text-[#173E2A] space-y-2">
-                  <a
-                    href="https://github.com/GiMendescCodes"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    GitHub |
-                  </a>
-
-                  <a
-                    href="https://www.linkedin.com/in/giovannasilvamendes/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    LinkedIn |
-                  </a>
-
-                  <a
-                    href="hhttps://gimendesccodes.github.io/portfolioGen/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    Portfólio
-                  </a>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
-
-          {/*Bianca Casagrande*/}
-          <SwiperSlide>
-            <div
-              className="  w-full
-                min-h-[450px]
-                bg-[#BFC693]
-                rounded-[20px]
-                flex
-                flex-col
-                lg:flex-row
-                items-center
-                justify-center
-                px-6
-                md:px-10
-                lg:px-16
-                py-8
-                gap-8
-                lg:gap-20"
-            >
-              <div className="shadow-lg rounded-md flex-shrink-0">
-                <img
-                  className="w-52
-                    h-52
-                    sm:w-60
-                    sm:h-60
-                    md:w-72
-                    md:h-72
-                    lg:w-[350px]
-                    lg:h-[350px]
-                    rounded-[10px]
-                    object-cover"
-                  src="../src/midia/BiancaCasagrande.jpg"
-                  alt="Bianca Casagrande"
-                />
-              </div>
-
-              <div className="flex flex-col justify-center flex-1">
-                <h2 className="font-camera text-5xl text-[#FFF8E8] mb-1.5">
-                  Bianca Casagrande
-                </h2>
-
-                <p className="text-[#173E2A] text-2xl font-creato">Full Stack Java •</p>
-
-                <div className="font-creato text-lg text-[#173E2A] space-y-2">
-                  <a
-                    href="https://github.com/bccasagrande"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    GitHub |
-                  </a>
-
-                  <a
-                    href="https://www.linkedin.com/in/biancacarvalhocasagrande/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    LinkedIn |
-                  </a>
-
-                  <a
-                    href="https://www.instagram.com/biancaccasagrande/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    Portfólio
-                  </a>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
-
-          {/*Jhonatan Oliveira*/}
-          <SwiperSlide>
-            <div
-              className="  w-full
-                min-h-[450px]
-                bg-[#BFC693]
-                rounded-[20px]
-                flex
-                flex-col
-                lg:flex-row
-                items-center
-                justify-center
-                px-6
-                md:px-10
-                lg:px-16
-                py-8
-                gap-8
-                lg:gap-20"
-            >
-              <div className="shadow-lg rounded-md flex-shrink-0">
-                <img
-                  className="w-52
-                  h-52
-                  sm:w-60
-                  sm:h-60
-                  md:w-72
-                  md:h-72
-                  lg:w-[350px]
-                  lg:h-[350px]
-                  rounded-[10px]
-                  object-cover"
-                  src="../src/midia/JhonatanOliveira.jpg"
-                  alt="Jhonatan Oliveira"
-                />
-              </div>
-
-              <div className="flex flex-col justify-center flex-1">
-                <h2 className="font-camera text-5xl text-[#FFF8E8] mb-1.5">
-                  Jhonatan Oliveira
-                </h2>
-
-                <p className="text-[#173E2A] text-2xl font-creato">Full Stack Java •</p>
-
-                <div className="font-creato text-lg text-[#173E2A] space-y-2">
-                  <a
-                    href="https://github.com/JhonatanOliveira18"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    GitHub |
-                  </a>
-
-                  <a
-                    href="https://www.linkedin.com/in/devjhonatanoliveira/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    LinkedIn |
-                  </a>
-
-                  <a
-                    href="https://www.instagram.com/biancaccasagrande/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    Portfólio
-                  </a>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
-
-          {/*Dayane Santana*/}
-          <SwiperSlide>
-            <div
-              className="  w-full
-                min-h-[450px]
-                bg-[#BFC693]
-                rounded-[20px]
-                flex
-                flex-col
-                lg:flex-row
-                items-center
-                justify-center
-                px-6
-                md:px-10
-                lg:px-16
-                py-8
-                gap-8
-                lg:gap-20"
-            >
-              <div className="shadow-lg rounded-md flex-shrink-0">
-                <img
-                  className="w-52
-                    h-52
-                    sm:w-60
-                    sm:h-60
-                    md:w-72
-                    md:h-72
-                    lg:w-[350px]
-                    lg:h-[350px]
-                    rounded-[10px]
-                    object-cover"
-                  src="../src/midia/DayaneSantana.jpg"
-                  alt="Dayane Santana"
-                />
-              </div>
-
-              <div className="flex flex-col justify-center flex-1">
-                <h2 className="font-camera text-5xl text-[#FFF8E8] mb-1.5">
-                  Dayane Santana
-                </h2>
-
-                <p className="text-[#173E2A] text-2xl font-creato">Full Stack Java •</p>
-
-                <div className="font-creato text-lg text-[#173E2A] space-y-2">
-                  <a
-                    href="https://github.com/dayanesantana"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    GitHub |
-                  </a>
-
-                  <a
-                    href="http://linkedin.com/in/dayanesantana59"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    LinkedIn |
-                  </a>
-
-                  <a
-                    href="https://dayanesantana.github.io/meu-portfolio/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    Portfólio
-                  </a>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
-
-          {/*Jackeline Pessoa*/}
-          <SwiperSlide>
-            <div
-              className="  w-full
-                min-h-[450px]
-                bg-[#BFC693]
-                rounded-[20px]
-                flex
-                flex-col
-                lg:flex-row
-                items-center
-                justify-center
-                px-6
-                md:px-10
-                lg:px-16
-                py-8
-                gap-8
-                lg:gap-20"
-            >
-              <div className="shadow-lg rounded-md flex-shrink-0">
-                <img
-                  className="w-52
-                      h-52
-                      sm:w-60
-                      sm:h-60
-                      md:w-72
-                      md:h-72
-                      lg:w-[350px]
-                      lg:h-[350px]
-                      rounded-[10px]
-                      object-cover"
-                  src="../src/midia/JackelinePessoa.jpg"
-                />
-              </div>
-
-              <div className="flex flex-col justify-center flex-1">
-                <h2 className="font-camera text-5xl text-[#FFF8E8] mb-1.5">
-                  Jackeline Pessoa
-                </h2>
-
-                <p className="text-[#173E2A] text-2xl font-creato">Full Stack Java •</p>
-
-                <div className="font-creato text-lg text-[#173E2A] space-y-2">
-                  <a
-                    href="https://github.com/jackeline5458"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    GitHub |
-                  </a>
-
-                  <a
-                    href="https://www.linkedin.com/in/jackelinepessoa?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    LinkedIn |
-                  </a>
-
-                  <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    Portfólio
-                  </a>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
-
-          {/*Rafael */}
-          <SwiperSlide>
-            <div
-              className="  w-full
-                  min-h-[450px]
-                  bg-[#BFC693]
-                  rounded-[20px]
-                  flex
-                  flex-col
-                  lg:flex-row
-                  items-center
-                  justify-center
-                  px-6
-                  md:px-10
-                  lg:px-16
-                  py-8
-                  gap-8
-                  lg:gap-20"
-            >
-              <div className="shadow-lg rounded-md flex-shrink-0">
-                <img
-                  className="w-52
-                    h-52
-                    sm:w-60
-                    sm:h-60
-                    md:w-72
-                    md:h-72
-                    lg:w-[350px]
-                    lg:h-[350px]
-                    rounded-[10px]
-                    object-cover"
-                  src="../src/midia/RafaelScherer.jpg"
-                  alt="Rafael Scherer"
-                />
-              </div>
-
-              <div className="flex flex-col justify-center flex-1">
-                <h2 className="font-camera text-5xl text-[#FFF8E8] mb-1.5">
-                  Rafael Scherer
-                </h2>
-
-                <p className="text-[#173E2A] text-2xl font-creato">Full Stack Java •</p>
-
-                <div className="font-creato text-lg text-[#173E2A] space-y-2">
-                  <a
-                    href="https://github.com/rafaelscherer3"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    GitHub |
-                  </a>
-
-                  <a
-                    href="https://www.linkedin.com/in/rafaelscherer3/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    LinkedIn |
-                  </a>
-
-                  <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#CA5030] transition-colors duration-300 p-1.5"
-                  >
-                    Portfólio
-                  </a>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
     </div>
   );
