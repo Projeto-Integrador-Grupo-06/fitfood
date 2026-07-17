@@ -67,7 +67,7 @@ A API do FitFood está documentada e hospedada de forma online:
 
 ### Front-end
 O cliente pode interagir com o FitFood diretamente por aqui:
-*   **Link do Deploy Web:** `link_deploy`
+*   **Link do Deploy Web:** `fitfood-pnei.vercel.app`
 
 ---
 
