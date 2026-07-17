@@ -2,6 +2,16 @@ import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { Pagination, Autoplay } from "swiper/modules";
+import GrupoFitFood from "../../midia/Grupo_fitFood.png";
+import Logo from "../../midia/Logo.png";
+
+import Isabella from "../../midia/IsabelaRodrigues.jpg";
+import Giovanna from "../../midia/GiovannaMendes.jpg";
+import Bianca from "../../midia/BiancaCasagrande.jpg";
+import Jhonatan from "../../midia/JhonatanOliveira.jpg";
+import Dayane from "../../midia/DayaneSantana.jpg";
+import Jackeline from "../../midia/JackelinePessoa.jpg";
+import Rafael from "../../midia/RafaelScherer.jpg"; 
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -10,7 +20,7 @@ const equipe = [
   {
     nome: "Isabella Rodrigues",
     funcao: "Full Stack Java • UI/UX Designer",
-    imagem: "../src/midia/IsabelaRodrigues.jpg",
+    imagem: Isabella,
     github: "https://github.com/isa01rodrigues",
     linkedin: "https://www.linkedin.com/in/isabelladasilvarodriguesdev/",
     extra: { label: "Portfólio", url: "https://www.instagram.com/bella_stech" },
@@ -18,7 +28,7 @@ const equipe = [
   {
     nome: "Giovanna Mendes",
     funcao: "Full Stack Java",
-    imagem: "../src/midia/GiovannaMendes.jpg",
+    imagem: Giovanna,
     github: "https://github.com/GiMendescCodes",
     linkedin: "https://www.linkedin.com/in/giovannasilvamendes/",
     extra: { label: "Portfólio", url: "https://gimendesccodes.github.io/portfolioGen/" },
@@ -26,7 +36,7 @@ const equipe = [
   {
     nome: "Bianca Casagrande",
     funcao: "Full Stack Java",
-    imagem: "../src/midia/BiancaCasagrande.jpg",
+    imagem: Bianca,
     github: "https://github.com/bccasagrande",
     linkedin: "https://www.linkedin.com/in/biancacarvalhocasagrande/",
     extra: { label: "Portfólio", url: "https://www.instagram.com/biancaccasagrande/" },
@@ -34,7 +44,7 @@ const equipe = [
   {
     nome: "Jhonatan Oliveira",
     funcao: "Full Stack Java",
-    imagem: "../src/midia/JhonatanOliveira.jpg",
+    imagem: Jhonatan,
     github: "https://github.com/JhonatanOliveira18",
     linkedin: "https://www.linkedin.com/in/devjhonatanoliveira/",
     extra: { label: "Portfólio", url: "https://github.com/JhonatanOliveira18" },
@@ -42,7 +52,7 @@ const equipe = [
   {
     nome: "Dayane Santana",
     funcao: "Full Stack Java",
-    imagem: "../src/midia/DayaneSantana.jpg",
+    imagem: Dayane,
     github: "https://github.com/dayanesantana",
     linkedin: "http://linkedin.com/in/dayanesantana59",
     extra: { label: "Portfólio", url: "https://dayanesantana.github.io/meu-portfolio/" },
@@ -50,7 +60,7 @@ const equipe = [
   {
     nome: "Jackeline Pessoa",
     funcao: "Full Stack Java",
-    imagem: "../src/midia/JackelinePessoa.jpg",
+    imagem: Jackeline,
     github: "https://github.com/jackeline5458",
     linkedin:
       "https://www.linkedin.com/in/jackelinepessoa?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
@@ -59,7 +69,7 @@ const equipe = [
   {
     nome: "Rafael Scherer",
     funcao: "Full Stack Java",
-    imagem: "../src/midia/RafaelScherer.jpg",
+    imagem: Rafael,
     github: "https://github.com/rafaelscherer3",
     linkedin: "https://www.linkedin.com/in/rafaelscherer3/",
     extra: { label: "Portfólio", url: "#" },
