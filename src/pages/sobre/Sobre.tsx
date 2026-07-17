@@ -84,7 +84,7 @@ function Sobre() {
       <div className="flex flex-col lg:flex-row items-center justify-center gap-8 px-5">
         <img
           className="w-full max-w-[724px] h-auto rounded-[30px] p-5"
-          src="../src/midia/Grupo_fitFood.png"
+          src={GrupoFitFood}
           alt=""
         />
         <div>
@@ -127,7 +127,7 @@ function Sobre() {
           {/* Imagem */}
           <div className="w-full lg:w-1/2 ">
             <img
-              src="../src/midia/Logo.png"
+              src={Logo}
               alt="Sobre o Projeto"
               className="w-full h-[350px] sm:h-[350px] lg:h-full object-cover"
             />
