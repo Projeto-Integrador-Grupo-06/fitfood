@@ -5,35 +5,138 @@ export interface Alimentacao {
   nomeRefeicao: string;
   descricao: string;
   calorias: number;
-  proteinas: number;
-  carboidratos: number;
-  gorduras: number;
+  proteinas?: number;
+  carboidratos?: number;
+  gorduras?: number;
   quantidade: number;
   dataConsumo: string;
+
   categoria: {
     id: number;
   };
+
   usuario: {
     id: number;
   };
 }
 
-export async function criarAlimentacao(alimento: Alimentacao) {
-  const { data } = await api.post("/alimentacao", alimento);
-  return data;
+
+// CADASTRAR ALIMENTO
+export async function criarAlimentacao(dados: any) {
+  try {
+    const resposta = await api.post("/alimentacao", dados);
+
+    return resposta.data;
+
+  } catch (error: any) {
+
+    console.log(
+      "ERRO CADASTRAR ALIMENTAÇÃO:",
+      error.response?.data
+    );
+
+    throw error;
+  }
 }
 
+
+// LISTAR TODOS
 export async function listarAlimentacoes() {
-  const { data } = await api.get("/alimentacao");
-  return data;
+
+  try {
+
+    const { data } = await api.get("/alimentacao");
+
+    return data;
+
+  } catch (error: any) {
+
+    console.log(
+      "ERRO LISTAR ALIMENTAÇÕES:",
+      error.response?.data
+    );
+
+    throw error;
+  }
 }
 
 
-export const atualizarAlimentacao = async (id: number, dados: any) => {
-  const resposta = await api.put(`/alimentacao/${id}`, dados); // ou a rota correspondente do seu backend
-  return resposta.data;
-};
+// ATUALIZAR ALIMENTO
+export async function atualizarAlimentacao(
+  id: number,
+  dados: any
+) {
+  try {
 
+    const resposta = await api.put(
+      "/alimentacao",
+      {
+        id,
+        ...dados
+      }
+    );
+
+    return resposta.data;
+
+  } catch (error: any) {
+
+    console.log(
+      "ERRO ATUALIZAR ALIMENTAÇÃO:",
+      error.response?.data
+    );
+
+    throw error;
+  }
+}
+
+
+// EXCLUIR ALIMENTO
 export async function excluirAlimentacao(id: number) {
-  await api.delete(`/alimentacao/${id}`);
+
+  try {
+
+    await api.delete(
+      `/alimentacao/${id}`
+    );
+
+
+  } catch (error: any) {
+
+    console.log(
+      "ERRO EXCLUIR ALIMENTAÇÃO:",
+      error.response?.data
+    );
+
+    throw error;
+  }
+}
+
+
+// BUSCAR ALIMENTAÇÕES DO USUÁRIO
+export async function buscarAlimentacoesPorUsuario(
+  usuarioId: number
+) {
+
+  try {
+
+    const { data } = await api.get(
+      "/alimentacao"
+    );
+
+
+    return data.filter(
+      (item: any) =>
+        item.usuario?.id === usuarioId
+    );
+
+
+  } catch (error: any) {
+
+    console.log(
+      "ERRO BUSCAR ALIMENTAÇÕES DO USUÁRIO:",
+      error.response?.data
+    );
+
+    throw error;
+  }
 }

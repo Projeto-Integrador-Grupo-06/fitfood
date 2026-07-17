@@ -35,11 +35,21 @@ function ModalCategoria({ aberto, fechar, salvar, categoriaEdicao }: Props) {
     if (!aberto) return null;
 
     function handleSalvar() {
+
         if (!nome.trim()) {
             alert("Por favor, digite o nome da categoria.");
             return;
         }
+
+
+        if (!descricao.trim() || descricao.trim().length < 10) {
+            alert("A descrição deve ter pelo menos 10 caracteres.");
+            return;
+        }
+
+
         salvar(nome, descricao);
+
     }
 
     return (
@@ -70,7 +80,7 @@ function ModalCategoria({ aberto, fechar, salvar, categoriaEdicao }: Props) {
                     />
 
                     <textarea
-                        placeholder="Descrição curta (opcional)"
+                        placeholder="Descrição da categoria (mínimo 10 caracteres)"
                         value={descricao}
                         onChange={(e) => setDescricao(e.target.value)}
                         className="w-full rounded-xl border border-gray-300 p-3 h-28 bg-white resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500"

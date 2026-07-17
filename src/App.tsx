@@ -35,8 +35,7 @@ function App() {
       <div className="min-h-screen flex flex-col bg-[#F0F0CF]">
         <Layout>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/home" element={<Home />} />
             <Route path="/perfil" element={<Perfil />} />
