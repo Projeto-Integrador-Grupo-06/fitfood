@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { X } from "@phosphor-icons/react";
 import { COLORS } from "../../../utils/theme";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 interface Categoria {
     id: number;
@@ -37,13 +38,13 @@ function ModalCategoria({ aberto, fechar, salvar, categoriaEdicao }: Props) {
     function handleSalvar() {
 
         if (!nome.trim()) {
-            alert("Por favor, digite o nome da categoria.");
+            ToastAlerta("Por favor, digite o nome da categoria.", "info");
             return;
         }
 
 
         if (!descricao.trim() || descricao.trim().length < 10) {
-            alert("A descrição deve ter pelo menos 10 caracteres.");
+            ToastAlerta("A descrição deve ter pelo menos 10 caracteres.", "info");
             return;
         }
 
